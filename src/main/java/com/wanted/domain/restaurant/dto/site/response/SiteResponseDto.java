@@ -1,4 +1,4 @@
-package com.wanted.domain.restaurant.openapi.dto.site.response;
+package com.wanted.domain.restaurant.dto.site.response;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.wanted.domain.restaurant.dto;
+package com.wanted.domain.restaurant.openapi.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;

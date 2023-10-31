@@ -1,7 +1,6 @@
-package com.wanted.domain.restaurant.openapi.dto.workplace.response;
+package com.wanted.domain.restaurant.dto.workplace.response;
 
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
