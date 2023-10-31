@@ -73,7 +73,7 @@ public class RestaurantDataPipeline {
       List<RestaurantOpenApiData> curPageDataList = createRestaurantOpenApiDataList(restaurantJsonList);
       result.addAll(curPageDataList);
 
-      // 다음 페이지는 더이상 탐색할 데이터가 없다면 반복문을 탈출한다.
+      // 다음 페이지에 더이상 탐색할 데이터가 없다면 반복문을 탈출한다.
       // 조회 데이터수를 1000개로 고정했기에 현재가 1000개 이하면 다음은 데이터가 존재하지 않는다.
       if (curPageDataList.size() < 1000) {
         break;

@@ -40,7 +40,6 @@ public class RestaurantDataInitializer {
   private void initChineseData() {
     // 중식 데이터 호출
     List<RestaurantOpenApiData> chineseRestaurantResponseList = pipeline.getRestaurantOpenApiData(CHINESE);
-    System.out.println(chineseRestaurantResponseList.size());
 
     // todo: 중식 데이터 전처리
 
