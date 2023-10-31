@@ -3,12 +3,13 @@ package com.wanted.domain.restaurant.openapi.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.ToString;
 
 /**
  * RestaurantOpenApiResponse:맛집 open api responseDto
  */
 @Getter
-public class RestaurantOpenApiResponse {
+public class RestaurantOpenApiData {
     //시군명
     @JsonProperty("SIGUN_NM")
     private String sigunName;

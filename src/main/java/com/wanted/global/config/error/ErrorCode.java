@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
  */
 @Getter
 public enum ErrorCode {
+  // open api 호출 오류
+  JSON_PARSE_ERROR("JSON 파싱에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
   ;
 
   //오류 메시지

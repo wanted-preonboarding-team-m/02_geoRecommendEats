@@ -1,14 +1,18 @@
 package com.wanted.domain.restaurant.openapi;
 
-import com.wanted.domain.restaurant.openapi.dto.RestaurantOpenApiResponse;
+import com.wanted.domain.restaurant.openapi.dto.RestaurantOpenApiData;
 import com.wanted.domain.restaurant.openapi.pipeline.RestaurantDataPipeline;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
 
 /**
  * 경기도 공공데이터 포털에서 가져온 맛집 데이터를 전처리를 거쳐서 DB에 저장한다.
  */
 @RequiredArgsConstructor
+@Component
 public class RestaurantDataInitializer {
 
   private static final String CHINESE = "Genrestrtchifood";
@@ -21,6 +25,8 @@ public class RestaurantDataInitializer {
   /**
    * 정해진 타입들의 맛집 데이터들을 호출, 전처리, DB에 저장한다.
    */
+  // todo: 스케쥴러로 관리
+  @EventListener(ApplicationReadyEvent.class)
   public void initRestaurantData() {
     initChineseData();
     initJapaneseData();
@@ -32,8 +38,7 @@ public class RestaurantDataInitializer {
    */
   private void initChineseData() {
     // 중식 데이터 호출
-    List<RestaurantOpenApiResponse> chineseRestaurantResponseList = pipeline.getRestaurantOpenApiData(
-        CHINESE);
+    List<RestaurantOpenApiData> chineseRestaurantResponseList = pipeline.getRestaurantOpenApiData(CHINESE);
 
     // todo: 중식 데이터 전처리
 
@@ -45,8 +50,7 @@ public class RestaurantDataInitializer {
    */
   private void initJapaneseData() {
     // 일식 데이터 호출
-    List<RestaurantOpenApiResponse> japaneseRestaurantResponseList = pipeline.getRestaurantOpenApiData(
-        JAPANESE);
+    List<RestaurantOpenApiData> japaneseRestaurantResponseList = pipeline.getRestaurantOpenApiData(JAPANESE);
 
     // todo: 일식 데이터 전처리
 
@@ -58,8 +62,7 @@ public class RestaurantDataInitializer {
    */
   private void initFastFoodData() {
     // 패스트푸드 데이터 호출
-    List<RestaurantOpenApiResponse> fastFoodRestaurantResponseList = pipeline.getRestaurantOpenApiData(
-        FAST_FOOD);
+    List<RestaurantOpenApiData> fastFoodRestaurantResponseList = pipeline.getRestaurantOpenApiData(FAST_FOOD);
 
     // todo: 패스트푸드 데이터 전처리
 
