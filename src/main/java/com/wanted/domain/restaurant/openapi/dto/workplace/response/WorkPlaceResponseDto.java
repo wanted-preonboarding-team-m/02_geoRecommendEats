@@ -21,12 +21,12 @@ import lombok.NoArgsConstructor;
 @Builder
 public class WorkPlaceResponseDto {
     //사업장 명
-    private String workplace_name;
+    private String workplaceName;
     //사업가 인허가 일자
-    private String license_date;
+    private String licenseDate;
     //사업자 상태명
-    private String business_status;
+    private String businessStatus;
     //영업장 주변 구분명
-    private String classification_name;
+    private String classificationName;
 
 }

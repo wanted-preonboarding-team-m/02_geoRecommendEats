@@ -23,15 +23,15 @@ import lombok.NoArgsConstructor;
 @Builder
 public class FacilityResponseDto {
     // 등급 구분명
-    private String restaurant_rating_name;
+    private String restaurantRatingName;
     // 급수 시설 구분명
-    private String restaurant_water_facility;
+    private String restaurantWaterFacility;
     // 다중 이용 여부
-    private String restaurant_available;
+    private String restaurantAvailable;
     // 총 시설 규모
-    private String restaurant_facility_scale;
+    private String restaurantFacilityScale;
     // 만들어진 년도
-    private String restaurant_made_year;
+    private String restaurantCloseYear;
     // 폐업 일자
     private String restaurant_close_year;
 }

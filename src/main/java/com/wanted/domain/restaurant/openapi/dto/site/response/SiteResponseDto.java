@@ -19,11 +19,11 @@ import lombok.NoArgsConstructor;
 @Builder
 public class SiteResponseDto {
     //소재지 도로명 주소
-    private String road_name_address;
+    private String roadNameAddress;
     //소재지 지번 주소
-    private String lot_number_address;
+    private String lotNumberAddress;
     //소재지 우편번호
-    private String zip_code;
+    private String zipCode;
     //소재지 면적
     private long area;
 }

@@ -25,7 +25,7 @@ public class LocationResponseDto {
     //경도
     private String lon;
     //시군명
-    private String sigun_name;
+    private String sigunName;
     //시군코드
-    private String sigun_code;
+    private String sigunCode;
 }

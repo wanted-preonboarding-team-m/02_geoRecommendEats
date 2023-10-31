@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class HygieneResponseDto {
     //위생업종명
-    private String industry_name;
+    private String industryName;
     //위생업태명
-    private String business_name;
+    private String businessName;
 }

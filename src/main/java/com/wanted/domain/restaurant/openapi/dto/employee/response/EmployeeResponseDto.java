@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * EmployeeResponseDto : 맛집 종업원 수
- * @total_number : TOT_FACLT_SCALE
+ * @total_number : TOT_EMPLY_CNT
  * @MALE_ENFLPSN_CNT : male_number
  * @FEMALE_ENFLPSN_CNT : female_number
  */
