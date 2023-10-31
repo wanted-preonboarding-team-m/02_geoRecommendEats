@@ -7,12 +7,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 /**
  * 경기도 공공데이터 포털에서 open api를 호출하여 맛집 데이터를 받아오는 pipeline
  */
+@Component
 @RequiredArgsConstructor
 public class RestaurantDataPipeline {
 

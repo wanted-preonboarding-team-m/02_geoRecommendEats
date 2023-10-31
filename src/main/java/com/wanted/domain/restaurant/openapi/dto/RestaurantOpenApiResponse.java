@@ -85,7 +85,6 @@ public class RestaurantOpenApiResponse {
     @JsonProperty("LOCPLC_AR")
     private long area;
 
-
     //사업장 명
     @JsonProperty("BIZPLC_NM")
     private String workplaceName;
