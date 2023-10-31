@@ -1,4 +1,4 @@
-package com.wanted._geoRecommendEats;
+package com.wanted;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
