@@ -30,7 +30,7 @@ public class RestaurantDataPipeline {
 
   // open api 호출시 파라미터에 필요한 인증 키
   @Value("${open-api.key}")
-  private static String API_KEY;
+  private String API_KEY;
 
   // open api 호출시 사용할 restTemplate
   private final RestTemplate restTemplate;
@@ -47,22 +47,44 @@ public class RestaurantDataPipeline {
    */
   public List<RestaurantOpenApiData> getRestaurantOpenApiData(String restaurantType) {
 
-    // open api 호출 url 생성
-    URI url = createOpenApiUrl(restaurantType);
+    // 반환할 dto 리스트
+    List<RestaurantOpenApiData> result = new ArrayList<>();
 
-    // open api 호출 후 응답된 json 데이터를 String으로 받는다.
-    String jsonString = restTemplate.getForObject(url, String.class);
+    // open api 호출시 page를 지정하는 파라미터
+    int pIndex = 1;
 
-    // JsonParser를 통해 jsonString을 jsonObject로 변환한다.
-    JSONObject jsonObject = createJsonObject(jsonString);
+    // 한번에 불러올 수 있는 데이터가 1000개로 한정되어 있기 때문에 더이상 불러올 데이터가 없을때까지 페이지를 늘리면서 호출한다.
+    while (true) {
+      // open api 호출 url 생성
+      URI url = createOpenApiUrl(restaurantType, pIndex);
 
-    // 변환한 jsonObject에서 필요한 속성을 추출한다. (공공데이터 포털 json의 응답 형태 참고)
-    JSONArray genre = (JSONArray) jsonObject.get(restaurantType);
-    JSONObject row = (JSONObject) genre.get(1);
-    JSONArray restaurantJsonList = (JSONArray) row.get("row");
+      // open api 호출 후 응답된 json 데이터를 String으로 받는다.
+      String jsonString = restTemplate.getForObject(url, String.class);
+
+      // JsonParser를 통해 jsonString을 jsonObject로 변환한다.
+      JSONObject jsonObject = createJsonObject(jsonString);
+
+      // 변환한 jsonObject에서 필요한 속성을 추출한다. (공공데이터 포털 json의 응답 형태 참고)
+      JSONArray genre = (JSONArray) jsonObject.get(restaurantType);
+      JSONObject row = (JSONObject) genre.get(1);
+      JSONArray restaurantJsonList = (JSONArray) row.get("row");
+
+      // 현재 페이지에서 생성한 dto 리스트를 결과 dto 리스트에 추가한다.
+      List<RestaurantOpenApiData> curPageDataList = createRestaurantOpenApiDataList(restaurantJsonList);
+      result.addAll(curPageDataList);
+
+      // 다음 페이지는 더이상 탐색할 데이터가 없다면 반복문을 탈출한다.
+      // 조회 데이터수를 1000개로 고정했기에 현재가 1000개 이하면 다음은 데이터가 존재하지 않는다.
+      if (curPageDataList.size() < 1000) {
+        break;
+      }
+
+      // 다음 페이지를 탐색한다.
+      pIndex++;
+    }
 
     // 추출한 맛집 json 리스트를 dto 리스트로 변환한다.
-    return createRestaurantOpenApiDataList(restaurantJsonList);
+    return result;
   }
 
   /**
@@ -71,10 +93,12 @@ public class RestaurantDataPipeline {
    * @param restaurantType 맛집 타입 (중식, 일식, 패스트푸드)
    * @return open api 호출 url
    */
-  private URI createOpenApiUrl(String restaurantType) {
+  private URI createOpenApiUrl(String restaurantType, int pIndex) {
     return UriComponentsBuilder.fromHttpUrl(BASE_URL + restaurantType)
-        .queryParam("key", "ac1a55d500054c14a7cf20f19a069580")
-        .queryParam("type", "json")
+        .queryParam("key", API_KEY) // open api 인증키
+        .queryParam("type", "json") // json 형태로 응답
+        .queryParam("pIndex", pIndex) // 페이지
+        .queryParam("pSize", "1000") // 한번에 불러올 데이터 수 (최대 1000개로 제한되어 있음)
         .build()
         .toUri();
   }

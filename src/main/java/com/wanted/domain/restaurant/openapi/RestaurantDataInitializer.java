@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class RestaurantDataInitializer {
 
+  // 정해진 맛집 타입들 (중식, 일식, 패스트푸드)
   private static final String CHINESE = "Genrestrtchifood";
   private static final String JAPANESE = "Genrestrtjpnfood";
   private static final String FAST_FOOD = "Genrestrtfastfood";
@@ -39,6 +40,7 @@ public class RestaurantDataInitializer {
   private void initChineseData() {
     // 중식 데이터 호출
     List<RestaurantOpenApiData> chineseRestaurantResponseList = pipeline.getRestaurantOpenApiData(CHINESE);
+    System.out.println(chineseRestaurantResponseList.size());
 
     // todo: 중식 데이터 전처리
 
