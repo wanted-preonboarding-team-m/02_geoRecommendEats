@@ -14,15 +14,15 @@ public class RestaurantOpenApiResponse {
     private String sigunName;
 
     //위도
-    @JsonProperty("SIGUN_NM")
+    @JsonProperty("REFINE_WGS84_LAT")
     private String lat;
 
     //경도
-    @JsonProperty("SIGUN_NM")
+    @JsonProperty("REFINE_WGS84_LOGT")
     private String lon;
 
     //시군코드
-    @JsonProperty("SIGUN_NM")
+    @JsonProperty("SIGUN_CD")
     private String sigun_code;
 
     //총 종업원
