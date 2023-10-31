@@ -18,10 +18,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Builder
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class EmployeeResponseDto {
     //총 종업원
-    private int total_number;
+    private int totalNumber;
     //남성 종업원
     private int male_number;
     //여성 종업원

@@ -19,7 +19,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Builder
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class WorkPlaceResponseDto {
     //사업장 명
     private String workplace_name;

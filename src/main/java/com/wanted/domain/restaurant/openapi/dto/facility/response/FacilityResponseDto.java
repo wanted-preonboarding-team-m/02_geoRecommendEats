@@ -21,7 +21,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Builder
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class FacilityResponseDto {
     // 등급 구분명
     private String restaurant_rating_name;

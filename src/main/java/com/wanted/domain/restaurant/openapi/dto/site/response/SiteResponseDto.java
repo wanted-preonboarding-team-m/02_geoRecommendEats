@@ -1,7 +1,5 @@
 package com.wanted.domain.restaurant.openapi.dto.site.response;
 
-
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +17,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Builder
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SiteResponseDto {
     //소재지 도로명 주소
     private String road_name_address;
