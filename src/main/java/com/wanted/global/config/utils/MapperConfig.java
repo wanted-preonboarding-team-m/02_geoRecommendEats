@@ -9,7 +9,4 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 public class MapperConfig {
     private final ObjectMapper mapper;
-
-    public String writeValueAsString(Object obj) throws JsonProcessingException {
-        return mapper.writeValueAsString(obj);
-    }}
+}
