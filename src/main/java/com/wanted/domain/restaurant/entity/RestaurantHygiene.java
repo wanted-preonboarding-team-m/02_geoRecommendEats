@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -38,4 +39,11 @@ public class RestaurantHygiene {
   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinColumn(name = "restaurant_id")
   private Restaurant restaurant;
+
+  @Builder
+  private RestaurantHygiene(String industryName, String businessName, Restaurant restaurant) {
+    this.industryName = industryName;
+    this.businessName = businessName;
+    this.restaurant = restaurant;
+  }
 }

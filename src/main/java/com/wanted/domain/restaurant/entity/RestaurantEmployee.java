@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -42,4 +43,13 @@ public class RestaurantEmployee {
   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinColumn(name = "restaurant_id")
   private Restaurant restaurant;
+
+  @Builder
+  private RestaurantEmployee(Integer totalNumber, Integer maleNumber, Integer femaleNumber,
+      Restaurant restaurant) {
+    this.totalNumber = totalNumber;
+    this.maleNumber = maleNumber;
+    this.femaleNumber = femaleNumber;
+    this.restaurant = restaurant;
+  }
 }

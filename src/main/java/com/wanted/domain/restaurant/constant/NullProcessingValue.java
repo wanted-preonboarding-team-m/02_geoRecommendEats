@@ -21,7 +21,10 @@ public enum NullProcessingValue {
   LONG_DEFAULT(-1L),
 
   // Double 타입의 default 값
-  DOUBLE_DEFAULT(-1.0);
+  DOUBLE_DEFAULT(-1.0),
+
+  // 날짜 String 타입의 default 값
+  DATE_DEFAULT("99991231");
 
   private final Object value;
 }

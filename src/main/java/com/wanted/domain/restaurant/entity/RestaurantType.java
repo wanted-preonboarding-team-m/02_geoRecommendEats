@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -38,4 +39,10 @@ public class RestaurantType {
   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinColumn(name = "restaurant_id")
   private Restaurant restaurant;
+
+  @Builder
+  private RestaurantType(FoodType type, Restaurant restaurant) {
+    this.type = type;
+    this.restaurant = restaurant;
+  }
 }

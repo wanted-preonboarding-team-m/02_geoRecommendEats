@@ -1,5 +1,6 @@
 package com.wanted.domain.restaurant.openapi.pipeline;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wanted.domain.restaurant.openapi.dto.RestaurantOpenApiData;
@@ -131,8 +132,10 @@ public class RestaurantDataPipeline {
     for (Object restaurantJson : restaurantJsonList) {
       JSONObject jsonProperties = (JSONObject) restaurantJson;
       try {
-        // json을 dto로 변환하여 리스트에 추가한다.
-        restaurantOpenApiDataList.add(mapper.readValue(jsonProperties.toJSONString(), RestaurantOpenApiData.class));
+        // json을 dto로 변환한다.
+        RestaurantOpenApiData restaurantOpenApiData = mapper.readValue(jsonProperties.toJSONString(), RestaurantOpenApiData.class);
+        // dto를 리스트에 추가한다.
+        restaurantOpenApiDataList.add(restaurantOpenApiData);
       } catch (JsonProcessingException e) {
         // json을 dto로 변환하는 것이 실패하면 예외를 발생시킨다. (속성명이 다르거나, 타입이 다르거나 등)
         throw new BusinessException(jsonProperties.toJSONString(), "jsonString", ErrorCode.JSON_PARSE_ERROR);

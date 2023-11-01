@@ -11,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import java.time.LocalDate;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -55,4 +56,16 @@ public class RestaurantFacility {
   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinColumn(name = "restaurant_id")
   private Restaurant restaurant;
+
+  @Builder
+  private RestaurantFacility(String ratingName, String waterFacilityName, String restaurantAvailable,
+      Long facilityScale, String madeYear, LocalDate closeDate, Restaurant restaurant) {
+    this.ratingName = ratingName;
+    WaterFacilityName = waterFacilityName;
+    this.restaurantAvailable = restaurantAvailable;
+    this.facilityScale = facilityScale;
+    this.madeYear = madeYear;
+    this.closeDate = closeDate;
+    this.restaurant = restaurant;
+  }
 }

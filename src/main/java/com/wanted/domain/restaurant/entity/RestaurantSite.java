@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -46,4 +47,14 @@ public class RestaurantSite {
   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinColumn(name = "restaurant_id")
   private Restaurant restaurant;
+
+  @Builder
+  private RestaurantSite(String roadNameAddress, String lotNumberAddress, Integer zipCode, Long area,
+      Restaurant restaurant) {
+    this.roadNameAddress = roadNameAddress;
+    this.lotNumberAddress = lotNumberAddress;
+    this.zipCode = zipCode;
+    this.area = area;
+    this.restaurant = restaurant;
+  }
 }
