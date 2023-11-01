@@ -1,6 +1,6 @@
 package com.wanted.domain.restaurant.openapi;
 
-import com.wanted.domain.restaurant.constant.RestaurantType;
+import com.wanted.domain.restaurant.constant.FoodType;
 import com.wanted.domain.restaurant.openapi.dto.RestaurantOpenApiData;
 import com.wanted.domain.restaurant.openapi.pipeline.RestaurantDataPipeline;
 import java.util.List;
@@ -26,7 +26,7 @@ public class RestaurantDataInitializer {
   // todo: 스케쥴러로 관리
   @EventListener(ApplicationReadyEvent.class)
   public void initRestaurantData() {
-    for (RestaurantType type : RestaurantType.values()) {
+    for (FoodType type : FoodType.values()) {
       initDataOfType(type);
     }
   }
@@ -36,7 +36,7 @@ public class RestaurantDataInitializer {
    *
    * @param type 맛집 타입 (중식, 일식, 패스트푸드)
    */
-  private void initDataOfType(RestaurantType type) {
+  private void initDataOfType(FoodType type) {
     // open api를 호출하여 데이터를 받아옵니다.
     List<RestaurantOpenApiData> restaurantOpenApiDataList = pipeline.getRestaurantOpenApiData(
         type.getUrlEndpoint());

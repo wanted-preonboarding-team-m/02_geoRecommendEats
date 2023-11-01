@@ -1,0 +1,45 @@
+package com.wanted.domain.restaurant.entity;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+/**
+ * 맛집의 종업원 수를 담는 엔티티
+ */
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Entity
+public class RestaurantEmployee {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "restaurant_employee_id")
+  private Long id;
+
+  // 총 종업원
+  @Column(nullable = false)
+  private Integer totalNumber;
+
+  // 남성 종업원
+  @Column(nullable = false)
+  private Integer maleNumber;
+
+  // 여성 종업원
+  @Column(nullable = false)
+  private Integer femaleNumber;
+
+  // Restaurnt 테이블이 부모 테이블
+  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @JoinColumn(name = "restaurant_id")
+  private Restaurant restaurant;
+}
