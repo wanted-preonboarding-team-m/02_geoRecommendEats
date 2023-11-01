@@ -33,6 +33,7 @@ public class RestaurantDataInitializer {
   @EventListener(ApplicationReadyEvent.class)
   public void initRestaurantData() {
     for (FoodType type : FoodType.values()) {
+      log.info("맛집 데이터 초기화 시작: {}", type);
       initDataOfType(type);
     }
     log.info("맛집 데이터 초기화 완료");

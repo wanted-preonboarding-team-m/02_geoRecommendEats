@@ -44,7 +44,7 @@ public class RestaurantSite {
   private Long area;
 
   // Restaurnt 테이블이 부모 테이블
-  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "restaurant_id")
   private Restaurant restaurant;
 

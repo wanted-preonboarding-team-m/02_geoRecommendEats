@@ -17,6 +17,7 @@ import com.wanted.domain.restaurant.entity.RestaurantType;
 import com.wanted.domain.restaurant.entity.RestaurantWorkplace;
 import com.wanted.domain.restaurant.openapi.dto.RestaurantOpenApiData;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -45,64 +46,67 @@ public class RestaurantDataDBInserter {
    * @param type 맛집 타입
    */
   public void insertRestaurantData(List<RestaurantOpenApiData> restaurantOpenApiDataList, FoodType type) {
+    // 전처리된 맛집 데이터를 저장할 리스트를 생성한다. (후에 saveAll로 한번에 저장하기 위함)
+    List<Restaurant> restaurants = new ArrayList<>();
+    List<RestaurantEmployee> employees = new ArrayList<>();
+    List<RestaurantFacility> facilities = new ArrayList<>();
+    List<RestaurantHygiene> hygienes = new ArrayList<>();
+    List<RestaurantSite> sites = new ArrayList<>();
+    List<RestaurantType> types = new ArrayList<>();
+    List<RestaurantWorkplace> workplaces = new ArrayList<>();
 
     // 전처리된 맛집 데이터 리스트를 순회하며, DB에 저장한다.
     for (RestaurantOpenApiData restaurantOpenApiData : restaurantOpenApiDataList) {
       // 속성 테이블과 연관관계를 맺기 전의 Restaurant 객체를 생성한다.
       Restaurant restaurant = new Restaurant();
 
-      // 맛집 속성 엔티티들을 저장하고 맛집 테이블과 연관관계를 맺는다.
-      insertRestaurantPropertyEntity(restaurantOpenApiData, restaurant, type);
+      // 맛집 속성 엔티티들을 리스트에 추가한다.
+      employees.add(createEmployeeData(restaurantOpenApiData, restaurant)); // 맛집 종업원 수
+      facilities.add(createFacilityData(restaurantOpenApiData, restaurant)); // 맛집 시설
+      hygienes.add(createHygieneData(restaurantOpenApiData, restaurant)); // 맛집 위생
+      sites.add(insertSiteData(restaurantOpenApiData, restaurant)); // 맛집 소재지
+      types.add(createTypeData(type, restaurant)); // 맛집 타입
+      workplaces.add(createWorkplaceData(restaurantOpenApiData, restaurant)); // 맛집 사업장
 
-      // 속성 테이블과 연관관계 맺기를 끝낸 Restaurant 객체를 저장한다.
-      restaurantRepository.save(restaurant);
+      // 속성 테이블과 연관관계 맺기를 끝낸 Restaurant 객체를 리스트에 추가한다.
+      restaurants.add(restaurant);
     }
+
+    // 맛집 엔티티 리스트를 한번에 저장한다. (save로 각각 저장하는 것보다 성능 좋음)
+    restaurantRepository.saveAll(restaurants);
+    employeeRepository.saveAll(employees);
+    facilityRepository.saveAll(facilities);
+    hygieneRepository.saveAll(hygienes);
+    siteRepository.saveAll(sites);
+    typeRepository.saveAll(types);
+    workplaceRepository.saveAll(workplaces);
   }
 
   /**
-   * 맛집 속성 엔티티들을 저장하고 맛집 테이블과 연관관계를 맺는다.
+   * 맛집의 종업원 수 엔티티를 생성한다.
    *
    * @param restaurantOpenApiData 맛집 데이터
    * @param restaurant 맛집 객체
-   * @param type 맛집 타입
+   * @return 생성된 맛집 종업원 수 엔티티
    */
-  private void insertRestaurantPropertyEntity(RestaurantOpenApiData restaurantOpenApiData, Restaurant restaurant, FoodType type) {
-    insertEmployeeData(restaurantOpenApiData, restaurant); // 맛집 종업원 수
-    insertFacilityData(restaurantOpenApiData, restaurant); // 맛집 시설
-    insertHygieneData(restaurantOpenApiData, restaurant); // 맛집 위생
-    insertSiteData(restaurantOpenApiData, restaurant); // 맛집 소재지
-    insertTypeData(type, restaurant); // 맛집 타입
-    insertWorkplaceData(restaurantOpenApiData, restaurant); // 맛집 사업장
-  }
-
-  /**
-   * 맛집의 종업원 수 데이터를 DB에 저장하여 맛집 테이블과 연관관계를 맺는다.
-   *
-   * @param restaurantOpenApiData 맛집 데이터
-   * @param restaurant 맛집 객체
-   */
-  private void insertEmployeeData(RestaurantOpenApiData restaurantOpenApiData, Restaurant restaurant) {
-    // 종업원 수 엔티티를 생성한다.
-    RestaurantEmployee employee = RestaurantEmployee.builder()
+  private RestaurantEmployee createEmployeeData(RestaurantOpenApiData restaurantOpenApiData, Restaurant restaurant) {
+    return RestaurantEmployee.builder()
         .totalNumber(restaurantOpenApiData.getTotalNumber())
         .maleNumber(restaurantOpenApiData.getMaleNumber())
         .femaleNumber(restaurantOpenApiData.getFemaleNumber())
         .restaurant(restaurant)
         .build();
-
-    // 종업원 수 엔티티를 DB에 저장한다.
-    employeeRepository.save(employee);
   }
 
   /**
-   * 맛집의 시설 데이터를 DB에 저장하여 맛집 테이블과 연관관계를 맺는다.
+   * 맛집 시설 엔티티를 생성한다.
    *
    * @param restaurantOpenApiData 맛집 데이터
    * @param restaurant 맛집 객체
+   * @return 생성된 맛집 시설 엔티티
    */
-  private void insertFacilityData(RestaurantOpenApiData restaurantOpenApiData, Restaurant restaurant) {
-    // 시설 엔티티를 생성한다.
-    RestaurantFacility facility = RestaurantFacility.builder()
+  private RestaurantFacility createFacilityData(RestaurantOpenApiData restaurantOpenApiData, Restaurant restaurant) {
+    return RestaurantFacility.builder()
         .ratingName(restaurantOpenApiData.getRatingName())
         .waterFacilityName(restaurantOpenApiData.getWaterFacilityName())
         .restaurantAvailable(restaurantOpenApiData.getRestaurantAvailable())
@@ -111,80 +115,70 @@ public class RestaurantDataDBInserter {
         .closeDate(toLocalDate(restaurantOpenApiData.getCloseDate())) // String을 LocalDate로 변환하고 저장한다.
         .restaurant(restaurant)
         .build();
-
-    // 시설 엔티티를 DB에 저장한다.
-    facilityRepository.save(facility);
   }
 
   /**
-   * 맛집의 위생 데이터를 DB에 저장하여 맛집 테이블과 연관관계를 맺는다.
+   * 맛집 위생 엔티티를 생성한다.
    *
    * @param restaurantOpenApiData 맛집 데이터
    * @param restaurant 맛집 객체
+   * @return 생성된 맛집 위생 엔티티
    */
-  private void insertHygieneData(RestaurantOpenApiData restaurantOpenApiData, Restaurant restaurant) {
-    RestaurantHygiene hygiene = RestaurantHygiene.builder()
+  private RestaurantHygiene createHygieneData(RestaurantOpenApiData restaurantOpenApiData, Restaurant restaurant) {
+    return RestaurantHygiene.builder()
         .industryName(restaurantOpenApiData.getIndustryName())
         .businessName(restaurantOpenApiData.getBusinessName())
         .restaurant(restaurant)
         .build();
-
-    hygieneRepository.save(hygiene);
   }
 
   /**
-   * 맛집의 소재지 데이터를 DB에 저장하여 맛집 테이블과 연관관계를 맺는다.
+   * 맛집 소재지 엔티티를 생성한다.
    *
    * @param restaurantOpenApiData 맛집 데이터
    * @param restaurant 맛집 객체
+   * @return 생성된 맛집 소재지 엔티티
    */
-  private void insertSiteData(RestaurantOpenApiData restaurantOpenApiData, Restaurant restaurant) {
-    RestaurantSite site = RestaurantSite.builder()
+  private RestaurantSite insertSiteData(RestaurantOpenApiData restaurantOpenApiData, Restaurant restaurant) {
+    return RestaurantSite.builder()
         .roadNameAddress(restaurantOpenApiData.getRoadNameAddress())
         .lotNumberAddress(restaurantOpenApiData.getLotNumberAddress())
         .zipCode(restaurantOpenApiData.getZipCode())
         .area(restaurantOpenApiData.getArea())
         .restaurant(restaurant)
         .build();
-
-    siteRepository.save(site);
   }
 
   /**
-   * 맛집의 타입 데이터를 DB에 저장하여 맛집 테이블과 연관관계를 맺는다.
+   * 맛집 타입 엔티티를 생성한다.
    *
    * @param type 맛집 타입
    * @param restaurant 맛집 객체
+   * @return 생성된 맛집 타입 엔티티
    */
-  private void insertTypeData(FoodType type, Restaurant restaurant) {
-    // 타입 엔티티를 생성한다.
-    RestaurantType restaurantType = RestaurantType.builder()
+  private RestaurantType createTypeData(FoodType type, Restaurant restaurant) {
+    return RestaurantType.builder()
         .type(type)
         .restaurant(restaurant)
         .build();
-
-    // 타입 엔티티를 DB에 저장한다.
-    typeRepository.save(restaurantType);
   }
 
   /**
-   * 맛집의 사업장 데이터를 DB에 저장하여 맛집 테이블과 연관관계를 맺는다.
+   * 맛집 사업장 엔티티를 생성한다.
    *
    * @param restaurantOpenApiData 맛집 데이터
    * @param restaurant 맛집 객체
+   * @return 생성된 맛집 사업장 엔티티
    */
-  private void insertWorkplaceData(RestaurantOpenApiData restaurantOpenApiData, Restaurant restaurant) {
+  private RestaurantWorkplace createWorkplaceData(RestaurantOpenApiData restaurantOpenApiData, Restaurant restaurant) {
     // 사업장 엔티티를 생성한다.
-    RestaurantWorkplace workplace = RestaurantWorkplace.builder()
+    return RestaurantWorkplace.builder()
         .workplaceName(restaurantOpenApiData.getWorkplaceName())
         .licenseDate(toLocalDate(restaurantOpenApiData.getLicenseDate())) // String을 LocalDate로 변환하고 저장한다.
         .businessStatus(restaurantOpenApiData.getBusinessStatus())
         .classificationName(restaurantOpenApiData.getClassificationName())
         .restaurant(restaurant)
         .build();
-
-    // 사업장 엔티티를 DB에 저장한다.
-    workplaceRepository.save(workplace);
   }
 
   /**
