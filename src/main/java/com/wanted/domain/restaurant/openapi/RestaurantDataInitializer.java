@@ -1,5 +1,6 @@
 package com.wanted.domain.restaurant.openapi;
 
+import com.wanted.domain.restaurant.constant.RestaurantType;
 import com.wanted.domain.restaurant.openapi.dto.RestaurantOpenApiData;
 import com.wanted.domain.restaurant.openapi.pipeline.RestaurantDataPipeline;
 import java.util.List;
@@ -15,58 +16,33 @@ import org.springframework.stereotype.Component;
 @Component
 public class RestaurantDataInitializer {
 
-  // 정해진 맛집 타입들 (중식, 일식, 패스트푸드)
-  private static final String CHINESE = "Genrestrtchifood";
-  private static final String JAPANESE = "Genrestrtjpnfood";
-  private static final String FAST_FOOD = "Genrestrtfastfood";
-
   // open api를 호출하여 데이터를 받아오기 위한 파이프라인
   private final RestaurantDataPipeline pipeline;
 
   /**
-   * 정해진 타입들의 맛집 데이터들을 호출, 전처리, DB에 저장한다.
+   * RestaurantType에 지정된 타입들의 맛집 데이터를 초기화 및 갱신합니다.
+   * 반목문으로 enum에 지정된 타입들을 순회하기 때문에, 타입에 변화를 주고 싶으면 enum만 수정하면됩니다.
    */
   // todo: 스케쥴러로 관리
   @EventListener(ApplicationReadyEvent.class)
   public void initRestaurantData() {
-    initChineseData();
-    initJapaneseData();
-    initFastFoodData();
+    for (RestaurantType type : RestaurantType.values()) {
+      initDataOfType(type);
+    }
   }
 
   /**
-   * 중식 데이터를 호출, 전처리, DB에 저장한다.
+   * enum으로 지정한 타입의 맛집의 데이터를 호출, 전처리, DB에 저장합니다.
+   *
+   * @param type 맛집 타입 (중식, 일식, 패스트푸드)
    */
-  private void initChineseData() {
-    // 중식 데이터 호출
-    List<RestaurantOpenApiData> chineseRestaurantResponseList = pipeline.getRestaurantOpenApiData(CHINESE);
+  private void initDataOfType(RestaurantType type) {
+    // open api를 호출하여 데이터를 받아옵니다.
+    List<RestaurantOpenApiData> restaurantOpenApiDataList = pipeline.getRestaurantOpenApiData(
+        type.getUrlEndpoint());
 
-    // todo: 중식 데이터 전처리
+    // todo: 받아온 데이터를 전처리한다. (null이면 default 값 삽입)
 
-    // todo: 중식 데이터 DB에 저장
-  }
-
-  /**
-   * 일식 데이터를 호출, 전처리, DB에 저장한다.
-   */
-  private void initJapaneseData() {
-    // 일식 데이터 호출
-    List<RestaurantOpenApiData> japaneseRestaurantResponseList = pipeline.getRestaurantOpenApiData(JAPANESE);
-
-    // todo: 일식 데이터 전처리
-
-    // todo: 일식 데이터 DB에 저장
-  }
-
-  /**
-   * 패스트푸드 데이터를 호출, 전처리, DB에 저장한다.
-   */
-  private void initFastFoodData() {
-    // 패스트푸드 데이터 호출
-    List<RestaurantOpenApiData> fastFoodRestaurantResponseList = pipeline.getRestaurantOpenApiData(FAST_FOOD);
-
-    // todo: 패스트푸드 데이터 전처리
-
-    // todo: 패스트푸드 데이터 DB에 저장
+    // todo: 전처리된 데이터들을 DB에 저장한다.
   }
 }
