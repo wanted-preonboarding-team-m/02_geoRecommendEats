@@ -14,12 +14,12 @@ spring:
     username: root
     password: root
 
-  jpa:
-    hibernate:
-      ddl-auto: create
-
 #p6spy
 decorator:
   datasource:
     p6spy:
       enable-logging: true
+
+open-api:
+  key: ac1a55d500054c14a7cf20f19a069580
+  url: https://openapi.gg.go.kr/

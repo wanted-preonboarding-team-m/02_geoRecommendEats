@@ -35,6 +35,10 @@ dependencies {
 	//p6spy 설치 (3.x는 1.9.0버전 사용해야함)
 	implementation "com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6"
 
+	// jsonParser 설치 (open api 응답값 파싱)
+	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
+
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'

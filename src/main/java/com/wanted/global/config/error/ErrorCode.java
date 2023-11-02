@@ -8,7 +8,13 @@ import org.springframework.http.HttpStatus;
  */
 @Getter
 public enum ErrorCode {
-  ;
+  // open api 호출 오류
+  JSON_PARSE_ERROR("JSON 파싱에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
+
+
+  //csv
+  NOT_LOCATION("해당 지역이 존재하지 않습니다.", HttpStatus.BAD_REQUEST),
+  CSV_PARSER_ERROR("csv 파일을 다시 한번 확인해주세요.", HttpStatus.INTERNAL_SERVER_ERROR);
 
   //오류 메시지
   private final String message;
