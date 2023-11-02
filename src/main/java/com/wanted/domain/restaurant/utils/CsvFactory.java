@@ -17,7 +17,7 @@ public class CsvFactory implements ApplicationListener<ContextRefreshedEvent> {
 
   //csv reader기
   private final CsvReader csvReader;
-  private final String path = "src/main/resources/sgg_lat_lon.csv";
+  private final String PATH = "src/main/resources/sgg_lat_lon.csv";
   private static final Logger LOG
       = Logger.getLogger(String.valueOf(CsvFactory.class));
 
@@ -25,7 +25,7 @@ public class CsvFactory implements ApplicationListener<ContextRefreshedEvent> {
   public void onApplicationEvent(ContextRefreshedEvent event) {
     LOG.info("starting to create csv");
     try {
-      csvReader.reader(path);
+      csvReader.reader(PATH);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
