@@ -27,6 +27,7 @@ public class CsvReader {
         csvSaveDto.save(line); //각 행마다 데이터를 저장한다
       }
       log.info("csv 파일 적재 완료 {}", csvSaveDto);
+      log.info("csv 파일 사이즈 {}", csvSaveDto.getCsvParserSize());
     } catch (
         IOException e) {
       e.printStackTrace();
