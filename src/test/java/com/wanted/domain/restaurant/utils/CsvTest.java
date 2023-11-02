@@ -68,4 +68,14 @@ public class CsvTest {
     int MAX_LEN_GANGWON = 18;
     Assertions.assertEquals(MAX_LEN_GANGWON, saveLines.get("강원").size());
   }
+
+  @Test
+  void 강원도에_홍천군을_찾는다() {
+    List<CsvResponseDto> csvResponseDtoList = saveLines.get("강원");
+    List<CsvResponseDto> hongcheon = csvResponseDtoList.stream()
+        .filter(dto -> "홍천군".equals(dto.getSiGunGu()))
+        .toList();
+    System.out.println(hongcheon.get(0).getDoSi());
+    Assertions.assertEquals(hongcheon.get(0).getSiGunGu(), "홍천군");
+  }
 }
