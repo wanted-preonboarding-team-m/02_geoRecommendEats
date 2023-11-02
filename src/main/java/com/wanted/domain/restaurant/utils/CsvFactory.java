@@ -8,10 +8,14 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+/**
+ * csv가 처음 어플리케이션로드할때 applicationContext가 초기화 된 이후 발동 되는곳
+ */
 @Component
 @RequiredArgsConstructor
 public class CsvFactory implements ApplicationListener<ContextRefreshedEvent> {
 
+  //csv reader기
   private final CsvReader csvReader;
   private final String path = "src/main/resources/sgg_lat_lon.csv";
   private static final Logger LOG
@@ -19,7 +23,7 @@ public class CsvFactory implements ApplicationListener<ContextRefreshedEvent> {
 
   @Override
   public void onApplicationEvent(ContextRefreshedEvent event) {
-    LOG.info("Increment counter");
+    LOG.info("starting to create csv");
     try {
       csvReader.reader(path);
     } catch (IOException e) {

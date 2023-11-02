@@ -8,11 +8,14 @@ import java.util.Map;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
 
-
+/**
+ * csv데이터 적재소
+ */
 @Getter
 @Component
 public class CsvSaveDto {
 
+  // 데이터를 담아놓는 곳
   private Map<String, List<CsvResponseDto>> csvParserCollection = new LinkedHashMap<>();
 
 
@@ -33,4 +36,18 @@ public class CsvSaveDto {
     return this.csvParserCollection.size();
   }
 
+  /**
+   * getMatcherDosiAndSigungu: 원하는 지역 및 시군구 를 통해서 CsvResponseDto를 반환 한다.
+   *
+   * @param dosi    도,시
+   * @param sigungu 시군구
+   * @return CsvResponseDto  -> fields:  lat ,lon sigungu,dosi
+   */
+  public CsvResponseDto getMatcherDosiAndSigungu(String dosi, String sigungu) {
+    List<CsvResponseDto> csvResponseDtoList = this.csvParserCollection.get(dosi);
+    return csvResponseDtoList.stream()
+        .filter(dto -> sigungu.equals(dto.getSiGunGu()))
+        .findFirst()
+        .orElseThrow();
+  }
 }
