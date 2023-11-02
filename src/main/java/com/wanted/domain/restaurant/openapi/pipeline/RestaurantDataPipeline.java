@@ -27,7 +27,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class RestaurantDataPipeline {
 
   // 경기도 공공데이터 포털에서 open api를 호출하는 url
-  private static final String BASE_URL = "https://openapi.gg.go.kr/";
+  @Value("${open-api.url}")
+  private String BASE_URL;
 
   // open api 호출시 파라미터에 필요한 인증 키
   @Value("${open-api.key}")
