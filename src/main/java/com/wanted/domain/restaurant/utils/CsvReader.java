@@ -1,6 +1,8 @@
 package com.wanted.domain.restaurant.utils;
 
 
+import com.wanted.global.config.error.BusinessException;
+import com.wanted.global.config.error.ErrorCode;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+/**
+ * CsvReader csv파일 path를 통해 읽는 곳
+ */
 @Component
 @RequiredArgsConstructor
 @Slf4j
@@ -28,9 +33,8 @@ public class CsvReader {
       }
       log.info("csv 파일 적재 완료 {}", csvSaveDto);
       log.info("csv 파일 사이즈 {}", csvSaveDto.getCsvParserSize());
-    } catch (
-        IOException e) {
-      e.printStackTrace();
+    } catch (IOException e) {
+      throw new BusinessException(e, "csv file error", ErrorCode.CSV_PARSER_ERROR);
     }
   }
 }

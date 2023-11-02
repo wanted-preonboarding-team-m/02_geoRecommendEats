@@ -1,11 +1,12 @@
 package com.wanted.domain.restaurant.utils;
 
 
+import com.wanted.global.config.error.BusinessException;
+import com.wanted.global.config.error.ErrorCode;
 import java.io.IOException;
 import java.util.logging.Logger;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @RequiredArgsConstructor
-public class CsvFactory implements ApplicationListener<ContextRefreshedEvent> {
+public class CsvFactory {
 
   //csv reader기
   private final CsvReader csvReader;
@@ -21,13 +22,13 @@ public class CsvFactory implements ApplicationListener<ContextRefreshedEvent> {
   private static final Logger LOG
       = Logger.getLogger(String.valueOf(CsvFactory.class));
 
-  @Override
-  public void onApplicationEvent(ContextRefreshedEvent event) {
+  @EventListener
+  public void onApplicationEvent() {
     LOG.info("starting to create csv");
     try {
       csvReader.reader(PATH);
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new BusinessException(e, "csv err", ErrorCode.CSV_PARSER_ERROR);
     }
   }
 }

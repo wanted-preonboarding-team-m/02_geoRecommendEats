@@ -13,7 +13,8 @@ public enum ErrorCode {
 
 
   //csv
-  NOT_LOCATION("해당 지역이 존재하지 않습니다.", HttpStatus.BAD_REQUEST);
+  NOT_LOCATION("해당 지역이 존재하지 않습니다.", HttpStatus.BAD_REQUEST),
+  CSV_PARSER_ERROR("csv 파일을 다시 한번 확인해주세요.", HttpStatus.INTERNAL_SERVER_ERROR);
 
   //오류 메시지
   private final String message;

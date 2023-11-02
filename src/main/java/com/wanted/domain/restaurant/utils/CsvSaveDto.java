@@ -18,7 +18,6 @@ public class CsvSaveDto {
   // 데이터를 담아놓는 곳
   private Map<String, List<CsvResponseDto>> csvParserCollection = new LinkedHashMap<>();
 
-
   public void save(String line) {
     String[] lines = line.split(",");
     List<CsvResponseDto> responseDtoList = new ArrayList<>();
@@ -29,6 +28,7 @@ public class CsvSaveDto {
         .lat(lines[3])
         .build();
     responseDtoList.add(csvResponseDto);
+    // map에 새로운 키가 등장하면 새롭게 추가하는 메서드
     this.csvParserCollection.computeIfAbsent(lines[0], k -> new ArrayList<>()).add(csvResponseDto);
   }
 
