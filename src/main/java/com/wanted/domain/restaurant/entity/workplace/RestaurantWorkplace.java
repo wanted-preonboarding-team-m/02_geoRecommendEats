@@ -1,4 +1,4 @@
-package com.wanted.domain.restaurant.entity;
+package com.wanted.domain.restaurant.entity.workplace;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -9,39 +9,43 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import java.time.LocalDate;
+
+import com.wanted.domain.restaurant.entity.Restaurant;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 맛집의 소재지 정보를 담는 엔티티
+ * 맛집의 사업장 정보를 담는 엔티티
  */
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class RestaurantSite {
+public class RestaurantWorkplace {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "restaurant_site_id")
+  @Column(name = "restaurant_workplace_id")
   private Long id;
 
-  // 소재지 도로명 주소
+  // 사업장명
   @Column(nullable = false)
-  private String roadNameAddress;
+  private String workplaceName;
 
-  // 소재지 지번 주소
+  // 사업자 인허가 일자
   @Column(nullable = false)
-  private String lotNumberAddress;
+  private LocalDate licenseDate;
 
-  // 소재지 우편번호
+  // 사업자 상태명
   @Column(nullable = false)
-  private Integer zipCode;
+  private String businessStatus;
 
-  // 소재지 면적
+  // 영업장 주변 구분명
   @Column(nullable = false)
-  private Long area;
+  private String classificationName;
 
   // Restaurnt 테이블이 부모 테이블
   @ManyToOne(fetch = FetchType.LAZY)
@@ -49,12 +53,12 @@ public class RestaurantSite {
   private Restaurant restaurant;
 
   @Builder
-  private RestaurantSite(String roadNameAddress, String lotNumberAddress, Integer zipCode, Long area,
-      Restaurant restaurant) {
-    this.roadNameAddress = roadNameAddress;
-    this.lotNumberAddress = lotNumberAddress;
-    this.zipCode = zipCode;
-    this.area = area;
+  private RestaurantWorkplace(String workplaceName, LocalDate licenseDate, String businessStatus,
+      String classificationName, Restaurant restaurant) {
+    this.workplaceName = workplaceName;
+    this.licenseDate = licenseDate;
+    this.businessStatus = businessStatus;
+    this.classificationName = classificationName;
     this.restaurant = restaurant;
   }
 }

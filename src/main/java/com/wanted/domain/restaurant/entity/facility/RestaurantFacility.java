@@ -1,4 +1,4 @@
-package com.wanted.domain.restaurant.entity;
+package com.wanted.domain.restaurant.entity.facility;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -10,6 +10,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import java.time.LocalDate;
+
+import com.wanted.domain.restaurant.entity.Restaurant;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
