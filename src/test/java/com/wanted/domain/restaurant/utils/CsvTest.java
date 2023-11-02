@@ -65,7 +65,6 @@ public class CsvTest {
 
   @Test
   void linesData를_Dto_변환이후_Map_넣고_강원에_데이터가_18개인지확인() {
-
     int MAX_LEN_GANGWON = 18;
     Assertions.assertEquals(MAX_LEN_GANGWON, saveLines.get("강원").size());
   }
