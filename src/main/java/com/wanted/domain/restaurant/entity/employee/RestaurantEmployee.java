@@ -1,4 +1,6 @@
-package com.wanted.domain.restaurant.entity;
+package com.wanted.domain.restaurant.entity.employee;
+
+import com.wanted.domain.restaurant.entity.Restaurant;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -10,40 +12,46 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 맛집의 위치 정보를 담는 엔티티
+ * 맛집의 종업원 수를 담는 엔티티
  */
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class RestaurantLocation {
+public class RestaurantEmployee {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "restaurant_location_id")
+  @Column(name = "restaurant_employee_id")
   private Long id;
 
-  // 위도
+  // 총 종업원
   @Column(nullable = false)
-  private Double lat;
+  private Integer totalNumber;
 
-  // 경도
+  // 남성 종업원
   @Column(nullable = false)
-  private Double lon;
+  private Integer maleNumber;
 
-  // 시군명
+  // 여성 종업원
   @Column(nullable = false)
-  private String sigunName;
-
-  // 시군코드
-  @Column(nullable = false)
-  private Integer sigunCode;
+  private Integer femaleNumber;
 
   // Restaurnt 테이블이 부모 테이블
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "restaurant_id")
   private Restaurant restaurant;
+
+  @Builder
+  private RestaurantEmployee(Integer totalNumber, Integer maleNumber, Integer femaleNumber,
+      Restaurant restaurant) {
+    this.totalNumber = totalNumber;
+    this.maleNumber = maleNumber;
+    this.femaleNumber = femaleNumber;
+    this.restaurant = restaurant;
+  }
 }
