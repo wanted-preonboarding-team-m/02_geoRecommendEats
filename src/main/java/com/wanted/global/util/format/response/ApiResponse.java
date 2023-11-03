@@ -1,4 +1,4 @@
-package com.wanted.global.format.response;
+package com.wanted.global.util.format.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

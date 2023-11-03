@@ -1,8 +1,8 @@
-package com.wanted.domain.restaurant.utils;
+package com.wanted.global.util.csv;
 
 
-import com.wanted.global.config.error.BusinessException;
-import com.wanted.global.config.error.ErrorCode;
+import com.wanted.global.error.BusinessException;
+import com.wanted.global.error.ErrorCode;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;

@@ -41,9 +41,4 @@ public class RestaurantLocation {
   // 시군코드
   @Column(nullable = false)
   private Integer sigunCode;
-
-  // Restaurnt 테이블이 부모 테이블
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "restaurant_id")
-  private Restaurant restaurant;
 }

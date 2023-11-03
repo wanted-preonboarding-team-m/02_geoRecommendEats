@@ -43,19 +43,11 @@ public class RestaurantWorkplace {
   // 영업장 주변 구분명
   @Column(nullable = false)
   private String classificationName;
-
-  // Restaurnt 테이블이 부모 테이블
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "restaurant_id")
-  private Restaurant restaurant;
-
   @Builder
-  private RestaurantWorkplace(String workplaceName, LocalDate licenseDate, String businessStatus,
-      String classificationName, Restaurant restaurant) {
+  private RestaurantWorkplace(String workplaceName, LocalDate licenseDate, String businessStatus, String classificationName) {
     this.workplaceName = workplaceName;
     this.licenseDate = licenseDate;
     this.businessStatus = businessStatus;
     this.classificationName = classificationName;
-    this.restaurant = restaurant;
   }
 }

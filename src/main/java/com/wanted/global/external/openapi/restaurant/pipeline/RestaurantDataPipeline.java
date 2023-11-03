@@ -2,9 +2,9 @@ package com.wanted.global.external.openapi.restaurant.pipeline;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wanted.global.error.BusinessException;
+import com.wanted.global.error.ErrorCode;
 import com.wanted.global.external.openapi.restaurant.dto.RestaurantOpenApiData;
-import com.wanted.global.config.error.BusinessException;
-import com.wanted.global.config.error.ErrorCode;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +71,8 @@ public class RestaurantDataPipeline {
       JSONArray restaurantJsonList = (JSONArray) row.get("row");
 
       // 현재 페이지에서 생성한 dto 리스트를 결과 dto 리스트에 추가한다.
-      List<RestaurantOpenApiData> curPageDataList = createRestaurantOpenApiDataList(restaurantJsonList);
+      List<RestaurantOpenApiData> curPageDataList = createRestaurantOpenApiDataList(
+          restaurantJsonList);
       result.addAll(curPageDataList);
 
       // 다음 페이지에 더이상 탐색할 데이터가 없다면 반복문을 탈출한다.
@@ -112,7 +113,7 @@ public class RestaurantDataPipeline {
    */
   private JSONObject createJsonObject(String jsonString) {
     try {
-      return  (JSONObject) jsonParser.parse(jsonString);
+      return (JSONObject) jsonParser.parse(jsonString);
     } catch (ParseException e) {
       // jsonString을 jsonObject로 파싱하는 것이 실패하면 예외를 발생시킨다.
       throw new BusinessException(jsonString, "jsonString", ErrorCode.JSON_PARSE_ERROR);
@@ -125,7 +126,8 @@ public class RestaurantDataPipeline {
    * @param restaurantJsonList 맛집 데이터가 담긴 json 리스트
    * @return dto로 변환된 맛집 데이터 리스트
    */
-  private List<RestaurantOpenApiData> createRestaurantOpenApiDataList(JSONArray restaurantJsonList) {
+  private List<RestaurantOpenApiData> createRestaurantOpenApiDataList(
+      JSONArray restaurantJsonList) {
     List<RestaurantOpenApiData> restaurantOpenApiDataList = new ArrayList<>();
 
     // 각각의 맛집의 json 데이터를 dto로 변환한다.
@@ -133,12 +135,14 @@ public class RestaurantDataPipeline {
       JSONObject jsonProperties = (JSONObject) restaurantJson;
       try {
         // json을 dto로 변환한다.
-        RestaurantOpenApiData restaurantOpenApiData = mapper.readValue(jsonProperties.toJSONString(), RestaurantOpenApiData.class);
+        RestaurantOpenApiData restaurantOpenApiData = mapper.readValue(
+            jsonProperties.toJSONString(), RestaurantOpenApiData.class);
         // dto를 리스트에 추가한다.
         restaurantOpenApiDataList.add(restaurantOpenApiData);
       } catch (JsonProcessingException e) {
         // json을 dto로 변환하는 것이 실패하면 예외를 발생시킨다. (속성명이 다르거나, 타입이 다르거나 등)
-        throw new BusinessException(jsonProperties.toJSONString(), "jsonString", ErrorCode.JSON_PARSE_ERROR);
+        throw new BusinessException(jsonProperties.toJSONString(), "jsonString",
+            ErrorCode.JSON_PARSE_ERROR);
       }
     }
 
