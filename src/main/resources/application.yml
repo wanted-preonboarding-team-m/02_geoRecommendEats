@@ -13,6 +13,9 @@ spring:
     url: jdbc:mysql://localhost:3306/02_geoRecommendEats?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root
     password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
 
   jpa:
     hibernate:
