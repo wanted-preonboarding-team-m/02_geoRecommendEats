@@ -7,6 +7,8 @@ import com.wanted.global.error.BusinessException;
 import com.wanted.global.error.ErrorCode;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
@@ -17,6 +19,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class MemberSignUpReqDto {
 
   public static final int MIN_ACCOUNT_LENGTH = 6;
