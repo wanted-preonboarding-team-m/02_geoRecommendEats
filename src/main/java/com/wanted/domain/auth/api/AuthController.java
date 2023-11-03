@@ -5,7 +5,7 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 import com.wanted.domain.auth.application.AuthService;
 import com.wanted.domain.member.dto.request.MemberSignUpReqDto;
-import com.wanted.global.format.response.ApiResponse;
+import com.wanted.global.util.format.response.ApiResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;

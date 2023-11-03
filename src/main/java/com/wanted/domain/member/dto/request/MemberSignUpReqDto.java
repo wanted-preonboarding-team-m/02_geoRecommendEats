@@ -3,8 +3,8 @@ package com.wanted.domain.member.dto.request;
 import static com.wanted.domain.member.entity.Member.MAX_ACCOUNT_LENGTH;
 
 import com.wanted.domain.member.entity.Member;
-import com.wanted.global.config.error.BusinessException;
-import com.wanted.global.config.error.ErrorCode;
+import com.wanted.global.error.BusinessException;
+import com.wanted.global.error.ErrorCode;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
