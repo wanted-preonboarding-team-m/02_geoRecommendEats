@@ -1,6 +1,6 @@
 package com.wanted.domain.restaurant.entity.facility;
 
-import jakarta.persistence.CascadeType;
+import com.wanted.domain.restaurant.entity.Restaurant;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,11 +8,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import java.time.LocalDate;
-
-import com.wanted.domain.restaurant.entity.Restaurant;
-
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -56,7 +53,7 @@ public class RestaurantFacility {
   private LocalDate closeDate;
 
   // Restaurnt 테이블이 부모 테이블
-  @ManyToOne(fetch = FetchType.LAZY)
+  @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "restaurant_id")
   private Restaurant restaurant;
 
