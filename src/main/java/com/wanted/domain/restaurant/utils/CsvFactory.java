@@ -5,6 +5,7 @@ import com.wanted.global.config.error.BusinessException;
 import com.wanted.global.config.error.ErrorCode;
 import java.io.IOException;
 import java.util.logging.Logger;
+import jdk.jfr.Event;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -24,7 +25,7 @@ public class CsvFactory {
       = Logger.getLogger(String.valueOf(CsvFactory.class));
 
   @EventListener(ApplicationReadyEvent.class)
-  public void onApplicationEvent() {
+  public void onApplicationEvent(Event event) {
     LOG.info("starting to create csv");
     try {
       csvReader.reader(PATH);
