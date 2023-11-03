@@ -1,9 +1,9 @@
-package com.wanted.domain.restaurant.openapi;
+package com.wanted.global.external.openapi.restaurant;
 
 import com.wanted.domain.restaurant.constant.FoodType;
-import com.wanted.domain.restaurant.openapi.dao.RestaurantDataDBInserter;
-import com.wanted.domain.restaurant.openapi.dto.RestaurantOpenApiData;
-import com.wanted.domain.restaurant.openapi.pipeline.RestaurantDataPipeline;
+import com.wanted.global.external.openapi.restaurant.dao.RestaurantDataDBInserter;
+import com.wanted.global.external.openapi.restaurant.dto.RestaurantOpenApiData;
+import com.wanted.global.external.openapi.restaurant.pipeline.RestaurantDataPipeline;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,9 +1,8 @@
-package com.wanted.domain.restaurant.openapi.pipeline;
+package com.wanted.global.external.openapi.restaurant.pipeline;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wanted.domain.restaurant.openapi.dto.RestaurantOpenApiData;
+import com.wanted.global.external.openapi.restaurant.dto.RestaurantOpenApiData;
 import com.wanted.global.config.error.BusinessException;
 import com.wanted.global.config.error.ErrorCode;
 import java.net.URI;

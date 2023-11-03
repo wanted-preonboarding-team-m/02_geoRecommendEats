@@ -1,4 +1,4 @@
-package com.wanted.domain.restaurant.openapi.dao;
+package com.wanted.global.external.openapi.restaurant.dao;
 
 import com.wanted.domain.restaurant.constant.FoodType;
 import com.wanted.domain.restaurant.dao.employee.RestaurantEmployeeRepository;
@@ -15,7 +15,7 @@ import com.wanted.domain.restaurant.entity.hygiene.RestaurantHygiene;
 import com.wanted.domain.restaurant.entity.site.RestaurantSite;
 import com.wanted.domain.restaurant.entity.type.RestaurantType;
 import com.wanted.domain.restaurant.entity.workplace.RestaurantWorkplace;
-import com.wanted.domain.restaurant.openapi.dto.RestaurantOpenApiData;
+import com.wanted.global.external.openapi.restaurant.dto.RestaurantOpenApiData;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

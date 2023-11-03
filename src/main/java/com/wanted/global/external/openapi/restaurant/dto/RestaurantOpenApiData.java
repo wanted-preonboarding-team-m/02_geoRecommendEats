@@ -1,4 +1,4 @@
-package com.wanted.domain.restaurant.openapi.dto;
+package com.wanted.global.external.openapi.restaurant.dto;
 
 
 import static com.wanted.domain.restaurant.constant.NullProcessingValue.DATE_DEFAULT;
