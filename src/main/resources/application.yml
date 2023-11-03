@@ -15,7 +15,7 @@ spring:
     password: root
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
 
 #p6spy
 decorator:
@@ -26,3 +26,7 @@ decorator:
 open-api:
   key: ac1a55d500054c14a7cf20f19a069580
   url: https://openapi.gg.go.kr/
+
+csv:
+  # 대한민국 시별 위도 경도 csv파일
+  sgg_lat_lon: "src/main/resources/sgg_lat_lon.csv"
