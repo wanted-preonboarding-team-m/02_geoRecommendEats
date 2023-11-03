@@ -39,17 +39,10 @@ public class RestaurantEmployee {
   @Column(nullable = false)
   private Integer femaleNumber;
 
-  // Restaurnt 테이블이 부모 테이블
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "restaurant_id")
-  private Restaurant restaurant;
-
   @Builder
-  private RestaurantEmployee(Integer totalNumber, Integer maleNumber, Integer femaleNumber,
-      Restaurant restaurant) {
+  private RestaurantEmployee(Integer totalNumber, Integer maleNumber, Integer femaleNumber) {
     this.totalNumber = totalNumber;
     this.maleNumber = maleNumber;
     this.femaleNumber = femaleNumber;
-    this.restaurant = restaurant;
   }
 }

@@ -43,18 +43,11 @@ public class RestaurantSite {
   @Column(nullable = false)
   private Long area;
 
-  // Restaurnt 테이블이 부모 테이블
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "restaurant_id")
-  private Restaurant restaurant;
-
   @Builder
-  private RestaurantSite(String roadNameAddress, String lotNumberAddress, Integer zipCode, Long area,
-      Restaurant restaurant) {
+  private RestaurantSite(String roadNameAddress, String lotNumberAddress, Integer zipCode, Long area) {
     this.roadNameAddress = roadNameAddress;
     this.lotNumberAddress = lotNumberAddress;
     this.zipCode = zipCode;
     this.area = area;
-    this.restaurant = restaurant;
   }
 }
