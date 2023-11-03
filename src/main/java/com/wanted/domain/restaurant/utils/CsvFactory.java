@@ -6,6 +6,7 @@ import com.wanted.global.config.error.ErrorCode;
 import java.io.IOException;
 import java.util.logging.Logger;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +23,7 @@ public class CsvFactory {
   private static final Logger LOG
       = Logger.getLogger(String.valueOf(CsvFactory.class));
 
-  @EventListener
+  @EventListener(ApplicationReadyEvent.class)
   public void onApplicationEvent() {
     LOG.info("starting to create csv");
     try {
