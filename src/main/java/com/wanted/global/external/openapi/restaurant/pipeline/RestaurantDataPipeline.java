@@ -25,6 +25,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequiredArgsConstructor
 public class RestaurantDataPipeline {
 
+  private static final int MAXIMUM_DATA_CALL_VOLUME = 1000;
+
   // 경기도 공공데이터 포털에서 open api를 호출하는 url
   @Value("${open-api.url}")
   private String BASE_URL;
@@ -77,7 +79,7 @@ public class RestaurantDataPipeline {
 
       // 다음 페이지에 더이상 탐색할 데이터가 없다면 반복문을 탈출한다.
       // 조회 데이터수를 1000개로 고정했기에 현재가 1000개 이하면 다음은 데이터가 존재하지 않는다.
-      if (curPageDataList.size() < 1000) {
+      if (curPageDataList.size() < MAXIMUM_DATA_CALL_VOLUME) {
         break;
       }
 
@@ -100,7 +102,7 @@ public class RestaurantDataPipeline {
         .queryParam("key", API_KEY) // open api 인증키
         .queryParam("type", "json") // json 형태로 응답
         .queryParam("pIndex", pIndex) // 페이지
-        .queryParam("pSize", "1000") // 한번에 불러올 데이터 수 (최대 1000개로 제한되어 있음)
+        .queryParam("pSize", MAXIMUM_DATA_CALL_VOLUME) // 한번에 불러올 데이터 수 (최대 1000개로 제한되어 있음)
         .build()
         .toUri();
   }
