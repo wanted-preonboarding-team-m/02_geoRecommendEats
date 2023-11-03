@@ -35,14 +35,8 @@ public class RestaurantType {
   @Enumerated(EnumType.STRING)
   private FoodType type;
 
-  // Restaurnt 테이블이 부모 테이블
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "restaurant_id")
-  private Restaurant restaurant;
-
   @Builder
-  private RestaurantType(FoodType type, Restaurant restaurant) {
+  private RestaurantType(FoodType type) {
     this.type = type;
-    this.restaurant = restaurant;
   }
 }

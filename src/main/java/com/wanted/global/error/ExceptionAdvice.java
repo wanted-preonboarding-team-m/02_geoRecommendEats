@@ -1,6 +1,6 @@
-package com.wanted.global.config.error;
+package com.wanted.global.error;
 
-import com.wanted.global.format.response.ApiResponse;
+import com.wanted.global.util.format.response.ApiResponse;
 import java.util.stream.Collectors;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;

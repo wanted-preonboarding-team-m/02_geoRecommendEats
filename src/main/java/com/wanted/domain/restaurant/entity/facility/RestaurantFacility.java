@@ -52,20 +52,14 @@ public class RestaurantFacility {
   @Column(nullable = false)
   private LocalDate closeDate;
 
-  // Restaurnt 테이블이 부모 테이블
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "restaurant_id")
-  private Restaurant restaurant;
-
   @Builder
   private RestaurantFacility(String ratingName, String waterFacilityName, String restaurantAvailable,
-      Long facilityScale, String madeYear, LocalDate closeDate, Restaurant restaurant) {
+      Long facilityScale, String madeYear, LocalDate closeDate) {
     this.ratingName = ratingName;
     WaterFacilityName = waterFacilityName;
     this.restaurantAvailable = restaurantAvailable;
     this.facilityScale = facilityScale;
     this.madeYear = madeYear;
     this.closeDate = closeDate;
-    this.restaurant = restaurant;
   }
 }

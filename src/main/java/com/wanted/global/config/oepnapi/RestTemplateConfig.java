@@ -1,4 +1,4 @@
-package com.wanted.global.external.openapi.restaurant.config;
+package com.wanted.global.config.oepnapi;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

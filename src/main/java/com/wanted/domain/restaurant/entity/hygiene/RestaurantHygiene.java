@@ -35,15 +35,9 @@ public class RestaurantHygiene {
   @Column(nullable = false)
   private String businessName;
 
-  // Restaurnt 테이블이 부모 테이블
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "restaurant_id")
-  private Restaurant restaurant;
-
   @Builder
-  private RestaurantHygiene(String industryName, String businessName, Restaurant restaurant) {
+  private RestaurantHygiene(String industryName, String businessName) {
     this.industryName = industryName;
     this.businessName = businessName;
-    this.restaurant = restaurant;
   }
 }
