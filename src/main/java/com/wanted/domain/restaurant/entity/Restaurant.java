@@ -20,8 +20,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 맛집 정보를 담는 엔티티
- * 세부 속성들은 별개의 테이블과 관계를 맺어서 관리한다.
+ * 맛집 정보를 담는 엔티티 세부 속성들은 별개의 테이블과 관계를 맺어서 관리한다.
  */
 @Getter
 @NoArgsConstructor
@@ -63,9 +62,9 @@ public class Restaurant {
 
   @Builder
   private Restaurant(RestaurantEmployee restaurantEmployee, RestaurantFacility restaurantFacility,
-                    RestaurantHygiene restaurantHygiene, RestaurantLocation restaurantLocation,
-                    RestaurantSite restaurantSite, RestaurantType restaurantType,
-                    RestaurantWorkplace restaurantWorkplace) {
+      RestaurantHygiene restaurantHygiene, RestaurantLocation restaurantLocation,
+      RestaurantSite restaurantSite, RestaurantType restaurantType,
+      RestaurantWorkplace restaurantWorkplace) {
     this.restaurantEmployee = restaurantEmployee;
     this.restaurantFacility = restaurantFacility;
     this.restaurantHygiene = restaurantHygiene;

@@ -1,4 +1,4 @@
-package com.wanted.global.config.error;
+package com.wanted.global.error;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
