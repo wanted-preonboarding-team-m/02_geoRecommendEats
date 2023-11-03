@@ -1,8 +1,8 @@
 package com.wanted.domain.auth.application;
 
-import com.wanted.domain.user.dao.MemberRepository;
-import com.wanted.domain.user.dto.request.MemberSignUpReqDto;
-import com.wanted.domain.user.entity.Member;
+import com.wanted.domain.member.dao.MemberRepository;
+import com.wanted.domain.member.dto.request.MemberSignUpReqDto;
+import com.wanted.domain.member.entity.Member;
 import com.wanted.global.config.error.BusinessException;
 import com.wanted.global.config.error.ErrorCode;
 import lombok.RequiredArgsConstructor;

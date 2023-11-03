@@ -4,7 +4,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 import com.wanted.domain.auth.application.AuthService;
-import com.wanted.domain.user.dto.request.MemberSignUpReqDto;
+import com.wanted.domain.member.dto.request.MemberSignUpReqDto;
 import com.wanted.global.format.response.ApiResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

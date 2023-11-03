@@ -1,4 +1,4 @@
-package com.wanted.domain.user.entity.location;
+package com.wanted.domain.member.entity.location;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 

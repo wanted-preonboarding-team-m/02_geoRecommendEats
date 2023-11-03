@@ -1,8 +1,8 @@
-package com.wanted.domain.user.dto.request;
+package com.wanted.domain.member.dto.request;
 
-import static com.wanted.domain.user.entity.Member.MAX_ACCOUNT_LENGTH;
+import static com.wanted.domain.member.entity.Member.MAX_ACCOUNT_LENGTH;
 
-import com.wanted.domain.user.entity.Member;
+import com.wanted.domain.member.entity.Member;
 import com.wanted.global.config.error.BusinessException;
 import com.wanted.global.config.error.ErrorCode;
 import jakarta.validation.constraints.NotNull;

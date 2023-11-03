@@ -1,9 +1,9 @@
-package com.wanted.domain.user.entity;
+package com.wanted.domain.member.entity;
 
 import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
-import com.wanted.domain.user.entity.location.MemberLocation;
+import com.wanted.domain.member.entity.location.MemberLocation;
 import com.wanted.global.config.entity.BaseTimeEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
