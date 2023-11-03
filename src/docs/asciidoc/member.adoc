@@ -1,0 +1,17 @@
+== 회원
+
+=== 회원 가입
+
+Request
+
+include::{snippets}/signup/회원_가입이_정상적으로_성공한다/http-request.adoc[]
+
+Response
+
+- 201 Created
+
+include::{snippets}/signup/회원_가입이_정상적으로_성공한다/http-response.adoc[]
+
+- 400 BadRequest
+
+include::{snippets}/signup/올바르지_않은_데이터는_회원_가입이_실패한다/http-response.adoc[]
