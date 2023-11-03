@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -46,4 +47,12 @@ public class Member extends BaseTimeEntity {
   // 비밀번호
   @Column(name = "password", nullable = false, length = MAX_PASSWORD_LENGTH)
   private String password;
+
+  @Builder
+  public Member(Long id, MemberLocation memberLocation, String account, String password) {
+    this.id = id;
+    this.memberLocation = memberLocation;
+    this.account = account;
+    this.password = password;
+  }
 }

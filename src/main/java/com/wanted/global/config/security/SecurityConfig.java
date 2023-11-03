@@ -53,15 +53,14 @@ public class SecurityConfig {
         // 로그인, 회원가입 API 는 토큰이 없는 상태에서 요청이 들어오기 때문에 permitAll 설정
         .authorizeHttpRequests(request ->
             request.requestMatchers(
-                    "/auth/**"
+                    "api/v1/auth/**"
                 )
                 .permitAll())
-        // TODO 특정 도메인 인증 추가 필요 (임시로 모든 도메인을 인증 필요로 설정)
-        .authorizeHttpRequests(request ->
-            request.anyRequest().authenticated()
+        // TODO 특정 도메인 인증 추가 필요 (임시로 모든 도메인을 인증 필요 없이로 설정)
+        .authorizeHttpRequests(
+            request -> request.anyRequest().permitAll()
         )
-        
+
         .build();
   }
-
 }
