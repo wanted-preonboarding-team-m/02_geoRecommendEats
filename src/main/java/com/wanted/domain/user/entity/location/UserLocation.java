@@ -24,6 +24,7 @@ public class UserLocation extends BaseTimeEntity {
   // 유저 위치의 아이디
   @Id
   @GeneratedValue(strategy = IDENTITY)
+  @Column(name = "user_location_id", nullable = false)
   private Long id;
 
   // 위도

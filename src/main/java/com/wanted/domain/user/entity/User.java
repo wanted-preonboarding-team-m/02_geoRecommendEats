@@ -31,6 +31,7 @@ public class User extends BaseTimeEntity {
   // 유저의 아이디
   @Id
   @GeneratedValue(strategy = IDENTITY)
+  @Column(name = "user_id", nullable = false)
   private Long id;
 
   // 유저 위치 (1:1)
