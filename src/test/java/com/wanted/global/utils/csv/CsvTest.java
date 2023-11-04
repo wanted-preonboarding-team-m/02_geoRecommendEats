@@ -1,4 +1,4 @@
-package com.wanted.domain.restaurant.utils;
+package com.wanted.global.utils.csv;
 
 import com.wanted.domain.restaurant.dto.location.response.CsvResponseDto;
 import java.io.BufferedReader;
