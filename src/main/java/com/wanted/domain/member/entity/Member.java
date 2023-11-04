@@ -1,5 +1,6 @@
 package com.wanted.domain.member.entity;
 
+import static jakarta.persistence.EnumType.STRING;
 import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -7,6 +8,7 @@ import com.wanted.domain.member.entity.location.MemberLocation;
 import com.wanted.global.config.entity.BaseTimeEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -48,11 +50,18 @@ public class Member extends BaseTimeEntity {
   @Column(name = "password", nullable = false, length = MAX_PASSWORD_LENGTH)
   private String password;
 
+  // 권한
+  @Enumerated(STRING)
+  @Column(name = "authority", nullable = false)
+  private Authority authority;
+
   @Builder
-  public Member(Long id, MemberLocation memberLocation, String account, String password) {
+  public Member(Long id, MemberLocation memberLocation, String account, String password,
+      Authority authority) {
     this.id = id;
     this.memberLocation = memberLocation;
     this.account = account;
     this.password = password;
+    this.authority = authority;
   }
 }
