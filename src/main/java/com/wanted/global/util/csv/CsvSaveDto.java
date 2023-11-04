@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
 
@@ -49,5 +50,19 @@ public class CsvSaveDto {
         .filter(dto -> sigungu.equals(dto.getSiGunGu()))
         .findFirst()
         .orElseThrow();
+  }
+
+  /**
+   * 전체 시군구를 반환한다.
+   *
+   * @return CsvResponseDto  -> fields:  lat ,lon sigungu,dosi
+   */
+  public List<CsvResponseDto> getAllDosiAndSigungu(){
+    List<CsvResponseDto> allResponseDtoList =
+        csvParserCollection.values().stream()
+            .flatMap(List::stream)
+            .collect(Collectors.toList());
+
+    return allResponseDtoList;
   }
 }
