@@ -1,5 +1,8 @@
 package com.wanted.global.config.security;
 
+import com.wanted.global.config.security.filter.JwtFilter;
+import com.wanted.global.config.security.handler.CustomAccessDeniedHandler;
+import com.wanted.global.config.security.handler.CustomAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * 시큐리티에 대한 전반적인 설정
@@ -18,6 +22,10 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
+
+  private final TokenProvider tokenProvider;
+  private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+  private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
   /**
    * 비밀번호 암호화 방식을 `BCrypt`로 설정
@@ -56,10 +64,18 @@ public class SecurityConfig {
                     "api/v1/auth/**"
                 )
                 .permitAll())
-        // TODO 특정 도메인 인증 추가 필요 (임시로 모든 도메인을 인증 필요 없이로 설정)
+        // TODO 특정 도메인 인증 추가 필요 (임시로 모든 도메인을 인증 필요로 설정)
         .authorizeHttpRequests(
-            request -> request.anyRequest().permitAll()
+            request -> request.anyRequest().authenticated()
         )
+
+        // 들어오는 요청에 대해서 헤더안에 있는 Jwt를 체크
+        .addFilterBefore(new JwtFilter(tokenProvider),
+            UsernamePasswordAuthenticationFilter.class)
+
+        // 예외 핸들러 적용
+        .exceptionHandling(e -> e.accessDeniedHandler(customAccessDeniedHandler))
+        .exceptionHandling(e -> e.accessDeniedHandler(customAccessDeniedHandler))
 
         .build();
   }

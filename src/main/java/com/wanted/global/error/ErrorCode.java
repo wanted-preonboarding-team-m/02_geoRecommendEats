@@ -18,6 +18,10 @@ public enum ErrorCode {
   // Member
   MEMBER_WRONG_PASSWORD_CONFIRM("비밀번호가 서로 일치하지 않습니다.", HttpStatus.BAD_REQUEST),
   MEMBER_ACCOUNT_DUPLICATE("중복된 아이디 입니다.", HttpStatus.BAD_REQUEST),
+
+  // Security
+  ACCESS_DENIED_EXCEPTION("필요한 접근 권한이 없습니다.", HttpStatus.FORBIDDEN),
+  ACCESS_AUTH_ENTRY_EXCEPTION("유요한 자격이 없습니다.", HttpStatus.UNAUTHORIZED),
   ;
 
   //오류 메시지
