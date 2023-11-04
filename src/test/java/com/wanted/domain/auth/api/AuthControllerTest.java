@@ -25,10 +25,7 @@ import org.springframework.http.MediaType;
 class AuthControllerTest extends AbstractRestDocsTests {
 
   private static final String AUTH_URL = "/api/v1/auth";
-
-  @Autowired
-  private AuthController authController;
-
+  
   @Autowired
   private final ObjectMapper objectMapper = new ObjectMapper();
 
