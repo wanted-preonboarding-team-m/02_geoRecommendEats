@@ -63,7 +63,7 @@ public class AuthController {
    * @param reqDto 로그인 입력 데이터
    * @return 200, JWT 토큰
    */
-  @PostMapping("login")
+  @PostMapping("/login")
   public ResponseEntity<ApiResponse> login(
       @RequestBody MemberLoginReqDto reqDto
   ) {
@@ -89,7 +89,7 @@ public class AuthController {
    * @param reqDto 토큰 정보
    * @return 200, 토큰 삭제
    */
-  @PostMapping("logout")
+  @PostMapping("/logout")
   public ResponseEntity<ApiResponse> logout(
       @RequestBody TokenReqDto reqDto
   ) {
