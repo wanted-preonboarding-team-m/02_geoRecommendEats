@@ -33,5 +33,5 @@ csv:
 
 jwt:
   # TODO 배포시 반드시 숨겨야함
-  secret: "eyJhbGciOiJIUzUxMiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY5OTA3MzM0MiwiaWF0IjoxNjk5MDczMzQyfQ.hZ5_kTLEYvr1Q2A7zJKqjn_TIlN3MPkweGuqhnSowNjAqMwVkWni_siTdrn66HrwecMyu0-4HF-6NTgo1YVTTQ"
+  secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK
 
