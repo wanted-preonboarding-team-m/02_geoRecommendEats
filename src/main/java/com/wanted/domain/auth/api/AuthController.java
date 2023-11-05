@@ -4,7 +4,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 import com.wanted.domain.auth.application.AuthService;
-import com.wanted.domain.member.dto.request.MemberLonginReqDto;
+import com.wanted.domain.member.dto.request.MemberLoginReqDto;
 import com.wanted.domain.member.dto.request.MemberSignUpReqDto;
 import com.wanted.global.config.security.data.TokenReqDto;
 import com.wanted.global.util.format.response.ApiResponse;
@@ -65,9 +65,9 @@ public class AuthController {
    */
   @PostMapping("login")
   public ResponseEntity<ApiResponse> login(
-      @RequestBody MemberLonginReqDto reqDto
+      @RequestBody MemberLoginReqDto reqDto
   ) {
-    return ResponseEntity.ok(ApiResponse.toSuccessForm(authService.longin(reqDto)));
+    return ResponseEntity.ok(ApiResponse.toSuccessForm(authService.login(reqDto)));
   }
 
   /**

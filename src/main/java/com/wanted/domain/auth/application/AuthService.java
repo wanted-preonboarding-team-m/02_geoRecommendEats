@@ -3,7 +3,7 @@ package com.wanted.domain.auth.application;
 import com.wanted.domain.auth.dao.token.RefreshTokenRepository;
 import com.wanted.domain.auth.entity.token.RefreshToken;
 import com.wanted.domain.member.dao.MemberRepository;
-import com.wanted.domain.member.dto.request.MemberLonginReqDto;
+import com.wanted.domain.member.dto.request.MemberLoginReqDto;
 import com.wanted.domain.member.dto.request.MemberSignUpReqDto;
 import com.wanted.domain.member.entity.Member;
 import com.wanted.global.config.security.TokenProvider;
@@ -70,7 +70,7 @@ public class AuthService {
    * @return
    */
   @Transactional
-  public TokenDto longin(MemberLonginReqDto reqDto) {
+  public TokenDto login(MemberLoginReqDto reqDto) {
     // 1. Login ID/PW 를 기반으로 AuthenticationToken 생성
     UsernamePasswordAuthenticationToken authenticationToken = reqDto.toAuthentication();
 

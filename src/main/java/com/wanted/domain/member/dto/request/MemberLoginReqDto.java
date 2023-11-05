@@ -13,7 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MemberLonginReqDto {
+public class MemberLoginReqDto {
 
   // 계정 아이디
   private String account;
