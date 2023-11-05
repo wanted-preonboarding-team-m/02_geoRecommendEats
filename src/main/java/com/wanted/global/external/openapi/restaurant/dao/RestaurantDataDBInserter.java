@@ -5,6 +5,7 @@ import com.wanted.domain.restaurant.dao.employee.RestaurantEmployeeRepository;
 import com.wanted.domain.restaurant.dao.facility.RestaurantFacilityRepository;
 import com.wanted.domain.restaurant.dao.hygiene.RestaurantHygieneRepository;
 import com.wanted.domain.restaurant.dao.RestaurantRepository;
+import com.wanted.domain.restaurant.dao.location.RestaurantLocationRepository;
 import com.wanted.domain.restaurant.dao.site.RestaurantSiteRepository;
 import com.wanted.domain.restaurant.dao.type.RestaurantTypeRepository;
 import com.wanted.domain.restaurant.dao.workplace.RestaurantWorkplaceRepository;
@@ -12,6 +13,7 @@ import com.wanted.domain.restaurant.entity.Restaurant;
 import com.wanted.domain.restaurant.entity.employee.RestaurantEmployee;
 import com.wanted.domain.restaurant.entity.facility.RestaurantFacility;
 import com.wanted.domain.restaurant.entity.hygiene.RestaurantHygiene;
+import com.wanted.domain.restaurant.entity.location.RestaurantLocation;
 import com.wanted.domain.restaurant.entity.site.RestaurantSite;
 import com.wanted.domain.restaurant.entity.type.RestaurantType;
 import com.wanted.domain.restaurant.entity.workplace.RestaurantWorkplace;
@@ -38,6 +40,7 @@ public class RestaurantDataDBInserter {
   private final RestaurantSiteRepository siteRepository; // 맛집 소재지 리포지토리
   private final RestaurantTypeRepository typeRepository; // 맛집 타입 리포지토리
   private final RestaurantWorkplaceRepository workplaceRepository; // 맛집 사업장 리포지토리
+  private final RestaurantLocationRepository locationRepository; // 맛집 위치 리포지토리
 
   /**
    * 전처리된 맛집 데이터를 DB에 저장한다.
@@ -54,6 +57,7 @@ public class RestaurantDataDBInserter {
     List<RestaurantSite> sites = new ArrayList<>();
     List<RestaurantType> types = new ArrayList<>();
     List<RestaurantWorkplace> workplaces = new ArrayList<>();
+    List<RestaurantLocation> locations = new ArrayList<>();
 
     // 전처리된 맛집 데이터 리스트를 순회하며, DB에 저장한다.
     for (RestaurantOpenApiData restaurantOpenApiData : restaurantOpenApiDataList) {
@@ -76,6 +80,9 @@ public class RestaurantDataDBInserter {
       RestaurantWorkplace workplace = createWorkplaceData(restaurantOpenApiData);
       workplaces.add(workplace); // 맛집 사업장
 
+      RestaurantLocation location = createLocationData(restaurantOpenApiData);
+      locations.add(location); // 맛집 위치
+
       Restaurant restaurant = Restaurant.builder()
               .restaurantEmployee(employee)
               .restaurantFacility(facility)
@@ -83,6 +90,7 @@ public class RestaurantDataDBInserter {
               .restaurantSite(site)
               .restaurantType(type)
               .restaurantWorkplace(workplace)
+              .restaurantLocation(location)
               .build();
 
       // 속성 테이블과 연관관계 맺기를 끝낸 Restaurant 객체를 리스트에 추가한다.
@@ -97,6 +105,7 @@ public class RestaurantDataDBInserter {
     siteRepository.saveAll(sites);
     typeRepository.saveAll(types);
     workplaceRepository.saveAll(workplaces);
+    locationRepository.saveAll(locations);
   }
 
   /**
@@ -183,6 +192,21 @@ public class RestaurantDataDBInserter {
         .licenseDate(toLocalDate(restaurantOpenApiData.getLicenseDate())) // String을 LocalDate로 변환하고 저장한다.
         .businessStatus(restaurantOpenApiData.getBusinessStatus())
         .classificationName(restaurantOpenApiData.getClassificationName())
+        .build();
+  }
+
+  /**
+   * 맛집 위치 엔티티를 생성한다.
+   *
+   * @param restaurantOpenApiData 맛집 데이터
+   * @return 생성된 맛집 위치 엔티티
+   */
+  private RestaurantLocation createLocationData(RestaurantOpenApiData restaurantOpenApiData) {
+    return RestaurantLocation.builder()
+        .lat(restaurantOpenApiData.getLat())
+        .lon(restaurantOpenApiData.getLon())
+        .sigunCode(restaurantOpenApiData.getSigunCode())
+        .sigunName(restaurantOpenApiData.getSigunName())
         .build();
   }
 
