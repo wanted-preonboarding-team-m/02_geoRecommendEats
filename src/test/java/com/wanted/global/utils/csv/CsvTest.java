@@ -1,5 +1,8 @@
 package com.wanted.global.utils.csv;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import com.wanted.domain.restaurant.dto.location.response.CsvResponseDto;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,8 +12,10 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -66,7 +71,7 @@ public class CsvTest {
   @Test
   void linesData를_Dto_변환이후_Map_넣고_강원에_데이터가_18개인지확인() {
     int MAX_LEN_GANGWON = 18;
-    Assertions.assertEquals(MAX_LEN_GANGWON, saveLines.get("강원").size());
+    assertEquals(MAX_LEN_GANGWON, saveLines.get("강원").size());
   }
 
   @Test
@@ -76,6 +81,22 @@ public class CsvTest {
         .filter(dto -> "홍천군".equals(dto.getSiGunGu()))
         .toList();
     System.out.println(hongcheon.get(0).getDoSi());
-    Assertions.assertEquals(hongcheon.get(0).getSiGunGu(), "홍천군");
+    assertEquals(hongcheon.get(0).getSiGunGu(), "홍천군");
+  }
+
+  @Test
+  void 전체_시구군을_조회한다(){
+    List<CsvResponseDto> allResponseDtoList =
+        saveLines.values().stream()
+            .flatMap(List::stream)
+            .collect(Collectors.toList());
+
+    int total = saveLines.values().stream()
+                .mapToInt(List::size)
+                .sum();
+
+    assertEquals(total, allResponseDtoList.size());
+
+    allResponseDtoList.forEach(dto -> System.out.println(dto.toString()));
   }
 }
