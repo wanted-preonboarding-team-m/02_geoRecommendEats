@@ -30,7 +30,7 @@ public class RestaurantDataInitializer {
    * 반목문으로 enum에 지정된 타입들을 순회하기 때문에, 타입에 변화를 주고 싶으면 enum만 수정하면됩니다.
    */
   // todo: 스케쥴러로 관리
-//  @EventListener(ApplicationReadyEvent.class)
+  @EventListener(ApplicationReadyEvent.class)
   public void initRestaurantData() {
     for (FoodType type : FoodType.values()) {
       log.info("맛집 데이터 초기화 시작: {}", type);

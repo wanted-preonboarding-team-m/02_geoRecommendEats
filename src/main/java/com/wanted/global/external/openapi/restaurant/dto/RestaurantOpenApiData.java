@@ -38,7 +38,7 @@ public class RestaurantOpenApiData {
     //시군코드
     @JsonProperty("SIGUN_CD")
     @JsonSetter(nulls = Nulls.SKIP)
-    private String sigun_code = (String) STRING_DEFAULT.getValue();
+    private Integer sigunCode = (Integer) INTEGER_DEFAULT.getValue();
 
     //총 종업원
     @JsonProperty("TOT_EMPLY_CNT")
