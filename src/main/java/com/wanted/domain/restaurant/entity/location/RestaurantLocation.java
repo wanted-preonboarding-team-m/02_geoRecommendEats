@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -41,4 +42,12 @@ public class RestaurantLocation {
   // 시군코드
   @Column(nullable = false)
   private Integer sigunCode;
+
+  @Builder
+  private RestaurantLocation(Double lat, Double lon, String sigunName, Integer sigunCode) {
+    this.lat = lat;
+    this.lon = lon;
+    this.sigunName = sigunName;
+    this.sigunCode = sigunCode;
+  }
 }
