@@ -5,6 +5,7 @@ import com.wanted.domain.restaurant.dao.employee.RestaurantEmployeeRepository;
 import com.wanted.domain.restaurant.dao.facility.RestaurantFacilityRepository;
 import com.wanted.domain.restaurant.dao.hygiene.RestaurantHygieneRepository;
 import com.wanted.domain.restaurant.dao.RestaurantRepository;
+import com.wanted.domain.restaurant.dao.location.RestaurantLocationRepository;
 import com.wanted.domain.restaurant.dao.site.RestaurantSiteRepository;
 import com.wanted.domain.restaurant.dao.type.RestaurantTypeRepository;
 import com.wanted.domain.restaurant.dao.workplace.RestaurantWorkplaceRepository;
@@ -39,6 +40,7 @@ public class RestaurantDataDBInserter {
   private final RestaurantSiteRepository siteRepository; // 맛집 소재지 리포지토리
   private final RestaurantTypeRepository typeRepository; // 맛집 타입 리포지토리
   private final RestaurantWorkplaceRepository workplaceRepository; // 맛집 사업장 리포지토리
+  private final RestaurantLocationRepository locationRepository; // 맛집 위치 리포지토리
 
   /**
    * 전처리된 맛집 데이터를 DB에 저장한다.
@@ -103,6 +105,7 @@ public class RestaurantDataDBInserter {
     siteRepository.saveAll(sites);
     typeRepository.saveAll(types);
     workplaceRepository.saveAll(workplaces);
+    locationRepository.saveAll(locations);
   }
 
   /**
