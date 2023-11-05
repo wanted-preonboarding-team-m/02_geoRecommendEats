@@ -82,4 +82,18 @@ public class AuthController {
   ) {
     return ResponseEntity.ok(ApiResponse.toSuccessForm(authService.reissue(reqDto)));
   }
+
+  /**
+   * 로그아웃 및 토큰 삭제
+   *
+   * @param reqDto 토큰 정보
+   * @return 200, 토큰 삭제
+   */
+  @PostMapping("logout")
+  public ResponseEntity<ApiResponse> logout(
+      @RequestBody TokenReqDto reqDto
+  ) {
+    authService.logout(reqDto);
+    return ResponseEntity.ok(ApiResponse.toSuccessForm(null));
+  }
 }

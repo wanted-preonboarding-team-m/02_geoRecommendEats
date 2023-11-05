@@ -131,4 +131,29 @@ public class AuthService {
     // 토큰 발급
     return tokenDto;
   }
+
+  /**
+   * 로그아웃 - 토큰 삭제
+   *
+   * @param token
+   */
+  @Transactional
+  public void logout(TokenReqDto token) {
+    // 1. Refresh Token 검증
+    if (!tokenProvider.validateToken(token.getRefreshToken())) {
+      throw new BusinessException(null, "token", ErrorCode.REFRESH_TOKEN_BAD_REQUEST);
+    }
+
+    // 2. Access Token 에서 Member ID 가져오기
+    Authentication authentication = tokenProvider.getAuthentication(
+        token.getAccessToken());
+
+    // 3. Refresh Token 이 DB에 있는지 확인
+    refreshTokenRepository.findByKey(authentication.getName())
+        .orElseThrow(() ->
+            new BusinessException(authentication.getName(), "account", ErrorCode.MEMBER_LOGOUT));
+
+    // 4. 저장소에서 회원 ID 를 기반으로 Refresh Token 삭제
+    refreshTokenRepository.deleteByKey(authentication.getName());
+  }
 }
