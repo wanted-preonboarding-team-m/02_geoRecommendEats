@@ -1,4 +1,4 @@
-package com.wanted.domain.user.entity.location;
+package com.wanted.domain.member.entity.location;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -18,13 +18,13 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Table(name = "user_location")
-public class UserLocation extends BaseTimeEntity {
+@Table(name = "member_location")
+public class MemberLocation extends BaseTimeEntity {
 
   // 유저 위치의 아이디
   @Id
   @GeneratedValue(strategy = IDENTITY)
-  @Column(name = "user_location_id", nullable = false)
+  @Column(name = "member_location_id", nullable = false)
   private Long id;
 
   // 위도
