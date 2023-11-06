@@ -1,4 +1,4 @@
-package com.wanted.domain.auth.application;
+package com.wanted.domain.auth.application.security;
 
 import com.wanted.domain.member.dao.MemberRepository;
 import com.wanted.domain.member.entity.Member;
@@ -25,7 +25,8 @@ public class CustomUserDetailsService implements UserDetailsService {
   private final MemberRepository memberRepository;
 
   /**
-   * UserDetails 와 Authentication 의 패스워드 비교 + 검증
+   * UserDetails 와 Authentication 의 비밀번호 비교 + 검증
+   * 비밀번호는 AuthenticationProvider 에서 실제로 비교함
    *
    * @param username 회원의 아이디
    * @return 회원 Entity -> UserDetail 객체로 변환
@@ -44,9 +45,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
   /**
    * UserDetails 객체로 만들어서 리턴
-   *
-   * @param member
-   * @return
    */
   private UserDetails createUserDetails(Member member) {
     GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(
