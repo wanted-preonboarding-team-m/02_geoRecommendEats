@@ -456,6 +456,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_회원_가입">회원 가입</a></li>
 </ul>
 </li>
+<li><a href="#_로그인">로그인</a></li>
+<li><a href="#_토큰_재발급">토큰 재발급</a></li>
+<li><a href="#_로그아웃">로그아웃</a></li>
 </ul>
 </li>
 </ul>
@@ -558,7 +561,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/v1/auth/signup?_csrf=6qd9PuD9mnqwcx8Z2-yeIguyOmaxuf3KQnbMMpGTI9hjxyg12JVKC4TL_kqdEi0huMGqRDrXFweJjs_ncUStAKjyRutb9UwA HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/v1/auth/signup?_csrf=eZ7gKnGTexr1nqofxnBSY5TU34WIQ_EO-lerXA-HhFA8Q0w-SqzUGkP3SX_YrZJ99l1mAPbm8uS5c8cjzWGeOTawtWkOey4J HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Content-Length: 93
 Host: localhost:8080
@@ -584,12 +587,6 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 201 Created
 Content-Type: application/json;charset=UTF-8
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 0
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY
 Content-Length: 64
 
 {
@@ -610,12 +607,6 @@ Content-Length: 64
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 0
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY
 Content-Length: 125
 
 {
@@ -624,6 +615,188 @@ Content-Length: 125
   "data" : null
 }</code></pre>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_로그인">로그인</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Request</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/v1/auth/login?_csrf=iEPx4yCJ75Ov5ZgnMyGrsJ2FRI70Kpt9BEcXjDMCoOTKk3MguXeU1EGxjaWC1vxBBAyf06WyaezFH_5QYiQuuQs0k9b_pEEV HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 57
+Host: localhost:8080
+
+{
+  "account" : "test123",
+  "password" : "test123*"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Response</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>200</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 249
+
+{
+  "status" : "success",
+  "message" : null,
+  "data" : {
+    "grantType" : "올바른 Grant 타입",
+    "accessToken" : "새로운 Access 토큰",
+    "refreshToken" : "새로운 Refresh 토큰",
+    "accessTokenExpiresIn" : 166574
+  }
+}</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>400</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+Content-Length: 112
+
+{
+  "status" : "error",
+  "message" : "[null] password: 비밀번호가 틀렸습니다.",
+  "data" : null
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_토큰_재발급">토큰 재발급</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Request</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/v1/auth/login?_csrf=iEPx4yCJ75Ov5ZgnMyGrsJ2FRI70Kpt9BEcXjDMCoOTKk3MguXeU1EGxjaWC1vxBBAyf06WyaezFH_5QYiQuuQs0k9b_pEEV HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 57
+Host: localhost:8080
+
+{
+  "account" : "test123",
+  "password" : "test123*"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Response</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>200</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 249
+
+{
+  "status" : "success",
+  "message" : null,
+  "data" : {
+    "grantType" : "올바른 Grant 타입",
+    "accessToken" : "새로운 Access 토큰",
+    "refreshToken" : "새로운 Refresh 토큰",
+    "accessTokenExpiresIn" : 166574
+  }
+}</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>400</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+Content-Length: 112
+
+{
+  "status" : "error",
+  "message" : "[null] password: 비밀번호가 틀렸습니다.",
+  "data" : null
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_로그아웃">로그아웃</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Request</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/v1/auth/logout?_csrf=FYEPbJIMiMZTogtMF9YFMmmlRBWds4NBhNrj9qnSiuaTebh4J-U9VfM5vf5-kDx1c_sxC1-TaXStgbds4eOCw8jl79L3GI5M HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 97
+Host: localhost:8080
+
+{
+  "accessToken" : "올바른 Access 토큰",
+  "refreshToken" : "올바른 Refresh 토큰"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Response</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>200</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 67
+
+{
+  "status" : "success",
+  "message" : null,
+  "data" : null
+}</code></pre>
 </div>
 </div>
 </div>
