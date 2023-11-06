@@ -4,7 +4,6 @@ import com.wanted.domain.restaurant.dao.RestaurantRepository;
 import com.wanted.domain.restaurant.dto.restaurant.response.RestaurantRecomResDto;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +14,18 @@ import org.springframework.transaction.annotation.Transactional;
 public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
+
+    /**
+     * 맛집 목록 조회
+     *
+     * @param lat
+     * @param lon
+     * @param range
+     * @param sort
+     * @return 맛집 목록 (lat 위도, lon 경도, type 종류, workplcae_name 사업장명,
+     *                  road_name_address 소재지 도로명 주소, lot_number_address 소재지 지번 주소, zip_code 우편번호,
+     *                  rate 평점, distance 거리)
+     */
 
     public List<RestaurantRecomResDto> getRecommendRestaurant(
         String lat, String lon, Double range, String sort){
@@ -73,5 +84,4 @@ public class RestaurantService {
 
         return R * c;
     }
-
 }

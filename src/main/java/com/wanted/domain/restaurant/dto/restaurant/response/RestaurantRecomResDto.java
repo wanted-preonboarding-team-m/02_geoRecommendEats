@@ -1,6 +1,10 @@
 package com.wanted.domain.restaurant.dto.restaurant.response;
 
+import com.wanted.domain.restaurant.constant.FoodType;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,33 +13,53 @@ import lombok.Setter;
  */
 @Getter
 public class RestaurantRecomResDto {
+    //맛집 id
+    private long id;
+
+    //위도
     private double lat;
+
+    //경도
     private double lon;
-    private String sigun_name;
-    private String sigun_code;
-    private String type;
-    private String workplcae_name;
-    private String road_name_address;
-    private String lot_number_address;
-    private int zip_code;
+
+    //타입
+    @Enumerated(EnumType.STRING)
+    private FoodType type;
+
+    //사업장명
+    private String workplcaeName;
+
+    //소재지 도로명 주소
+    private String roadNameAddress;
+
+    //소재지 지번 주소
+    private String lotNumberAddress;
+
+    //소재지 우편번호
+    private int zipCode;
+
+    //평점
     private double rate;
+
+    //사용자 위치와 맛집 사이 거리
     private double distance;
 
-    public RestaurantRecomResDto(double lat, double lon, String sigun_name, String sigun_code,
-        String type, String workplcae_name, String road_name_address, String lot_number_address,
-        int zip_code, double rate) {
+    public RestaurantRecomResDto(long id, double lat, double lon, FoodType type, String workplcaeName, String roadNameAddress, String lotNumberAddress, int zipCode, double rate) {
+        this.id = id;
         this.lat = lat;
         this.lon = lon;
-        this.sigun_name = sigun_name;
-        this.sigun_code = sigun_code;
         this.type = type;
-        this.workplcae_name = workplcae_name;
-        this.road_name_address = road_name_address;
-        this.lot_number_address = lot_number_address;
-        this.zip_code = zip_code;
+        this.workplcaeName = workplcaeName;
+        this.roadNameAddress = roadNameAddress;
+        this.lotNumberAddress = lotNumberAddress;
+        this.zipCode = zipCode;
         this.rate = rate;
     }
 
+    /**
+     * 사용자 위치와 맛집 사이 거리 수정
+     * @param distance
+     */
     public void setDistance(double distance) {
         this.distance = distance;
     }
