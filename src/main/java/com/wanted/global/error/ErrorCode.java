@@ -20,6 +20,7 @@ public enum ErrorCode {
   MEMBER_ACCOUNT_DUPLICATE("중복된 아이디 입니다.", HttpStatus.BAD_REQUEST),
   MEMBER_ACCOUNT_NOT_FOUND("아이디를 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
   MEMBER_PASSWORD_BAD_REQUEST("비밀번호가 틀렸습니다.", HttpStatus.BAD_REQUEST),
+  MEMBER_NOT_FOUND("존재하지 않은 회원입니다", HttpStatus.BAD_REQUEST),
 
   // Security
   ACCESS_DENIED_EXCEPTION("필요한 접근 권한이 없습니다.", HttpStatus.FORBIDDEN),
@@ -30,8 +31,7 @@ public enum ErrorCode {
   MEMBER_LOGOUT("로그아웃 된 사용자입니다.", HttpStatus.BAD_REQUEST),
   REFRESH_TOKEN_BAD_REQUEST("Refresh Token 이 유효하지 않습니다.", HttpStatus.BAD_REQUEST),
   REFRESH_TOKEN_MISMATCH("Refresh Token 이 알맞지 않습니다.", HttpStatus.BAD_REQUEST),
-  ACCESS_TOKEN_BAD_REQUEST("Access Token 이 알맞지 않습니다.", HttpStatus.BAD_REQUEST),
-  ;
+  ACCESS_TOKEN_BAD_REQUEST("Access Token 이 알맞지 않습니다.", HttpStatus.BAD_REQUEST);
 
   //오류 메시지
   private final String message;
