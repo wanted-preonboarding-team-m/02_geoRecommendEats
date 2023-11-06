@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
@@ -29,8 +30,11 @@ public class RestaurantDataInitializer {
    * RestaurantType에 지정된 타입들의 맛집 데이터를 초기화 및 갱신합니다.
    * 반목문으로 enum에 지정된 타입들을 순회하기 때문에, 타입에 변화를 주고 싶으면 enum만 수정하면됩니다.
    */
-  // todo: 스케쥴러로 관리
 //  @EventListener(ApplicationReadyEvent.class)
+//  테스트를 위해서 데이터를 가져올 필요가 있다면 위 주석을 풀고 실행하면 어플리케이션 로딩 시에 데이터를 가져옵니다.
+
+  // 매주 일요일 새벽 4시에 데이터를 초기화합니다.
+  @Scheduled(cron = "0 0 4 * * 7")
   public void initRestaurantData() {
     for (FoodType type : FoodType.values()) {
       log.info("맛집 데이터 초기화 시작: {}", type);
