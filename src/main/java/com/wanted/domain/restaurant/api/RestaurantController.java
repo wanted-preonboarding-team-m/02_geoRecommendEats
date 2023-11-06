@@ -1,13 +1,16 @@
 package com.wanted.domain.restaurant.api;
 
 import com.wanted.domain.restaurant.application.RestaurantService;
+import com.wanted.domain.restaurant.dto.restaurant.response.RestaurantDetailResDto;
 import com.wanted.domain.restaurant.dto.restaurant.response.RestaurantRecomResDto;
 import com.wanted.global.util.format.response.ApiResponse;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,6 +44,23 @@ public class RestaurantController {
         List<RestaurantRecomResDto> restaurants = restaurantService.getRecommendRestaurant(lat,lon,range,sort);
 
         ApiResponse apiResponse = ApiResponse.toSuccessForm(restaurants);
+
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    /**
+     * 맛집 상세 정보 조회
+     *
+     * @param restaurantId
+     * @return 맛집 상세 정보(open api에서 받아온 모든 필드 포함)
+     */
+    @GetMapping("/{restaurantId}")
+    public ResponseEntity<ApiResponse> getRestaurantDetail(
+        @PathVariable Long restaurantId
+    ){
+        RestaurantDetailResDto restaurant = restaurantService.getRestaurantDetail(restaurantId);
+
+        ApiResponse apiResponse = ApiResponse.toSuccessForm(restaurant);
 
         return ResponseEntity.ok(apiResponse);
     }

@@ -84,4 +84,20 @@ class RestaurantControllerTest extends AbstractRestDocsTests {
                 .andExpect(status().is4xxClientError());
         }
     }
+
+    @Nested
+    @DisplayName("맛집 상세 정보 조회 테스트")
+    class getRestaurantDetail {
+
+        @Test
+        @DisplayName("맛집 상세 정보 조회 api가 성공한다.")
+        @WithMockUser(roles = {"USER"})
+        void 맛집_상세_정보_조회_성공() throws Exception{
+            Long restaurantId = 1L;
+
+            mockMvc.perform(
+                    get("/api/v1/restaurants/"+restaurantId))
+                .andExpect(status().isOk());
+        }
+    }
 }
