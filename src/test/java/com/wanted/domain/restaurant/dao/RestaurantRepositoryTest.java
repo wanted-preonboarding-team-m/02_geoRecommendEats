@@ -72,7 +72,7 @@ class RestaurantRepositoryTest {
         }
 
         @Test
-        @DisplayName("맛집 조회에 실패한다.")
+        @DisplayName("범위를 0으로 주면 맛집 조회에 실패한다.")
         void 맛집_조회_실패() {
             double lat = 37.2040;
             double lon = 127.07596008849987;
