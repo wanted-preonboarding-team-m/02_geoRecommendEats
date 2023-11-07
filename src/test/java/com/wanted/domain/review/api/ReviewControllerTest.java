@@ -86,8 +86,8 @@ class ReviewControllerTest extends AbstractRestDocsTests {
     @DisplayName("정상적으로 회사의 모든 리뷰를 반환한다.")
     void 정상적으로_회사의_모든_리뷰를_반환한다() throws Exception {
       List<Review> reviews = new ArrayList<>();
-      for (int i = 0; i < 5; i++) {
-        reviews.add(ReviewTestHelper.createReview());
+      for (int i = 1; i <= 3; i++) {
+        reviews.add(ReviewTestHelper.createReviewWithId((long) i));
       }
       ReviewsInRestaurantResDto resDto = new ReviewsInRestaurantResDto(reviews);
 
