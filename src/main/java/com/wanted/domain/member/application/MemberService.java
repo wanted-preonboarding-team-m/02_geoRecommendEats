@@ -31,20 +31,20 @@ public class MemberService {
   public MemberInfoResDto readMemberInfo(
       Long memberId
   ) {
-    Member member = getMemberById(memberId);
+    Member member = getMemberWithLocationById(memberId);
 
     MemberInfoResDto resDto = new MemberInfoResDto(member);
     return resDto;
   }
 
   /**
-   * id로 회원 찾기
+   * id로 회원 + 위치 찾기
    *
    * @param memberId 회원 ID
    * @return 찾은 회원
    */
-  private Member getMemberById(Long memberId) {
-    Member member = memberRepository.findById(memberId).orElseThrow(
+  private Member getMemberWithLocationById(Long memberId) {
+    Member member = memberRepository.findWithMemberLocationById(memberId).orElseThrow(
         () -> new BusinessException(memberId, "memberId", ErrorCode.MEMBER_NOT_FOUND)
     );
     return member;
@@ -64,10 +64,14 @@ public class MemberService {
       Long memberId,
       MemberLocationUpdateReqDto reqDto
   ) {
-    // 토큰 검증
-    checkAuth(token, memberId);
 
-    Member member = getMemberById(memberId);
+    // id로 회원+회원 위치 찾기, 회원이 없으면 예외처리
+    Member member = getMemberWithLocationById(memberId);
+
+    // 토큰 검증
+    checkAuth(token, member.getAccount());
+
+    // dto -> entity
     MemberLocation memberLocation = reqDto.toEntity();
 
     // 처음 위치를 저장 하면, 컬럼 저장.
@@ -87,14 +91,12 @@ public class MemberService {
    * 접근 권한이 있는지 확인
    * 토큰의 account 명과 접근하려는 회원의 account 명이 같은지 확인
    *
-   * @param token    JWT 토큰
-   * @param memberId 확인할 id
+   * @param token   JWT 토큰
+   * @param account 확인할 id
    */
-  private void checkAuth(String token, Long memberId) {
-    String account = getMemberById(memberId).getAccount();
-
+  private void checkAuth(String token, String account) {
     if (!tokenProvider.getAccountFromToken(token).equals(account)) {
-      throw new BusinessException(memberId, "memberId", ErrorCode.ACCESS_DENIED_EXCEPTION);
+      throw new BusinessException(account, "account", ErrorCode.ACCESS_DENIED_EXCEPTION);
     }
   }
 }
