@@ -14,13 +14,13 @@ import lombok.Setter;
 @Getter
 public class RestaurantRecomResDto {
     //맛집 id
-    private long id;
+    private Long id;
 
     //위도
-    private double lat;
+    private Double lat;
 
     //경도
-    private double lon;
+    private Double lon;
 
     //타입
     @Enumerated(EnumType.STRING)
@@ -36,15 +36,15 @@ public class RestaurantRecomResDto {
     private String lotNumberAddress;
 
     //소재지 우편번호
-    private int zipCode;
+    private Integer zipCode;
 
     //평점
-    private double rate;
+    private Double rate;
 
     //사용자 위치와 맛집 사이 거리
-    private double distance;
+    private Double distance;
 
-    public RestaurantRecomResDto(long id, double lat, double lon, FoodType type, String workplcaeName, String roadNameAddress, String lotNumberAddress, int zipCode, double rate) {
+    public RestaurantRecomResDto(Long id, Double lat, Double lon, FoodType type, String workplcaeName, String roadNameAddress, String lotNumberAddress, Integer zipCode, Double rate) {
         this.id = id;
         this.lat = lat;
         this.lon = lon;
