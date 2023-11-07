@@ -60,6 +60,9 @@ public class Restaurant {
   @JoinColumn(name = "restaurant_workplace_id")
   private RestaurantWorkplace restaurantWorkplace;
 
+  @Column(nullable = false)
+  private double rate;
+
   @Builder
   private Restaurant(RestaurantEmployee restaurantEmployee, RestaurantFacility restaurantFacility,
       RestaurantHygiene restaurantHygiene, RestaurantLocation restaurantLocation,
