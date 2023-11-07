@@ -74,10 +74,12 @@ public class Restaurant {
   private List<Review> reviews = new ArrayList<>();
 
   @Builder
-  private Restaurant(RestaurantEmployee restaurantEmployee, RestaurantFacility restaurantFacility,
+  private Restaurant(Long id, RestaurantEmployee restaurantEmployee,
+      RestaurantFacility restaurantFacility,
       RestaurantHygiene restaurantHygiene, RestaurantLocation restaurantLocation,
       RestaurantSite restaurantSite, RestaurantType restaurantType,
       RestaurantWorkplace restaurantWorkplace) {
+    this.id = id;
     this.restaurantEmployee = restaurantEmployee;
     this.restaurantFacility = restaurantFacility;
     this.restaurantHygiene = restaurantHygiene;
