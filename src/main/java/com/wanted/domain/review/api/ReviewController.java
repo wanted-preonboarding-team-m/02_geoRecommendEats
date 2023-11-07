@@ -5,11 +5,13 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import com.wanted.domain.auth.application.AuthService;
 import com.wanted.domain.review.application.ReviewService;
 import com.wanted.domain.review.dto.request.ReviewWriteReqDto;
+import com.wanted.domain.review.dto.response.ReviewsInRestaurantResDto;
 import com.wanted.global.util.format.response.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,5 +49,21 @@ public class ReviewController {
 
     return ResponseEntity.status(HttpStatus.CREATED)
         .body(ApiResponse.toSuccessForm(reviewId));
+  }
+
+  /**
+   * 식당의 모든 리뷰 조회
+   *
+   * @param restaurantId 식당 id
+   * @return 200, 식당의 모든 리뷰 데이터
+   */
+  @GetMapping("/restaurants/{restaurantId}")
+  public ResponseEntity<ApiResponse> readAllReviewsInRestaurant(
+      @PathVariable("restaurantId") Long restaurantId
+  ) {
+    ReviewsInRestaurantResDto resDto = reviewService.readAllReviewsInRestaurant(restaurantId);
+
+    return ResponseEntity.ok(
+        ApiResponse.toSuccessForm(resDto));
   }
 }

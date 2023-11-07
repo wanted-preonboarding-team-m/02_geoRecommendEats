@@ -6,9 +6,11 @@ import com.wanted.domain.restaurant.dao.RestaurantRepository;
 import com.wanted.domain.restaurant.entity.Restaurant;
 import com.wanted.domain.review.dao.ReviewRepository;
 import com.wanted.domain.review.dto.request.ReviewWriteReqDto;
+import com.wanted.domain.review.dto.response.ReviewsInRestaurantResDto;
 import com.wanted.domain.review.entity.Review;
 import com.wanted.global.error.BusinessException;
 import com.wanted.global.error.ErrorCode;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -76,5 +78,17 @@ public class ReviewService {
         () -> new BusinessException(restaurantId, "restaurantId", ErrorCode.RESTAURANT_NOT_FOUND)
     );
     return restaurant;
+  }
+
+  /**
+   * 식당의 모든 리뷰 조회
+   *
+   * @param restaurantId 식당 id
+   * @return 식당의 모든 리뷰 데이터
+   */
+  public ReviewsInRestaurantResDto readAllReviewsInRestaurant(Long restaurantId) {
+    List<Review> reviews = getRestaurantById(restaurantId).getReviews();
+
+    return new ReviewsInRestaurantResDto(reviews);
   }
 }
