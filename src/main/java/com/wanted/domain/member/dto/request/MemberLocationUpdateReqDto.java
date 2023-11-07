@@ -17,11 +17,11 @@ import lombok.NoArgsConstructor;
 public class MemberLocationUpdateReqDto {
 
   // 위도
-  @NotNull
+  @NotNull(message = "위도를 입력해주세요.")
   private Double lat;
 
   // 경도
-  @NotNull
+  @NotNull(message = "경도를 입력해주세요.")
   private Double logt;
 
   public MemberLocation toEntity() {
