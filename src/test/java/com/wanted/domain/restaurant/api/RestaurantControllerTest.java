@@ -26,7 +26,7 @@ class RestaurantControllerTest extends AbstractRestDocsTests {
         @DisplayName("맛집 조회 api가 성공한다. 모든 필드 정상 + 정렬기준은 거리")
         @Test
         @WithMockUser(roles = {"USER"})
-        void 맛집_조회_거리() throws Exception {
+        void 맛집_조회가_정상적으로_성공한다() throws Exception {
             String lat = "37.2040";
             String lon = "127.07596008849987";
             Double range = 2.0;
@@ -41,7 +41,7 @@ class RestaurantControllerTest extends AbstractRestDocsTests {
         @DisplayName("맛집 조회 api가 성공한다. 모든 필드 정상 + 정렬기준은 평점")
         @Test
         @WithMockUser(roles = {"USER"})
-        void 맛집_조회_평점() throws Exception {
+        void 맛집_조회_기준_평점_일때_성공한다() throws Exception {
             String lat = "37.2040";
             String lon = "127.07596008849987";
             Double range = 2.0;
@@ -57,7 +57,7 @@ class RestaurantControllerTest extends AbstractRestDocsTests {
         @DisplayName("맛집 조회 api가 성공한다. 모든 필드 정상 + 정렬기준은 입력안하면 거리입니다.")
         @Test
         @WithMockUser(roles = {"USER"})
-        void 맛집_조회_디폴트는_거리() throws Exception {
+        void 맛집_조회_기준_디폴트값_일때_성공한다() throws Exception {
             String lat = "37.2040";
             String lon = "127.07596008849987";
             Double range = 2.0;
@@ -73,7 +73,7 @@ class RestaurantControllerTest extends AbstractRestDocsTests {
         @DisplayName("위도가 입력되지 않아 맛집 조회 api가 실패한다.")
         @Test
         @WithMockUser(roles = {"USER"})
-        void 맛집_조회_실패_위도없음() throws Exception {
+        void 입력값이_없으면_맛집_조회가_실패한다() throws Exception {
             String lon = "127.07596008849987";
             Double range = 2.0;
             String sort = "";
@@ -92,12 +92,23 @@ class RestaurantControllerTest extends AbstractRestDocsTests {
         @Test
         @DisplayName("맛집 상세 정보 조회 api가 성공한다.")
         @WithMockUser(roles = {"USER"})
-        void 맛집_상세_정보_조회_성공() throws Exception{
+        void 맛집_상세_정보_조회가_성공한다() throws Exception{
             Long restaurantId = 1L;
 
             mockMvc.perform(
                     get("/api/v1/restaurants/"+restaurantId))
                 .andExpect(status().isOk());
         }
+
+//        @Test
+//        @DisplayName("id를 잘못입력하면 맛집 조회가 실패한다")
+//        @WithMockUser(roles = {"USER"})
+//        void 입력값이_잘못되면_맛집_상세_정보_조회가_실패한다() throws Exception{
+//            Long restaurantId = 99999L;
+//
+//            mockMvc.perform(
+//                    get("/api/v1/restaurants/"+restaurantId))
+//                .andExpect(status().is4xxClientError());
+//        }
     }
 }

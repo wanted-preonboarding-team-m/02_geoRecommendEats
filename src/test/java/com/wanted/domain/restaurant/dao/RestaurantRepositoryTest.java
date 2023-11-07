@@ -31,7 +31,7 @@ class RestaurantRepositoryTest {
     class findRestaurantsWithinRange{
         @Test
         @DisplayName("맛집 조회에 성공한다.")
-        void 맛집_조회_성공() {
+        void 맛집_조회_성공한다() {
             double lat = 37.2040;
             double lon = 127.07596008849987;
             double range = 2.0;
@@ -73,7 +73,7 @@ class RestaurantRepositoryTest {
 
         @Test
         @DisplayName("범위를 0으로 주면 맛집 조회에 실패한다.")
-        void 맛집_조회_실패() {
+        void 범위가_0이면_맛집_조회_실패한다() {
             double lat = 37.2040;
             double lon = 127.07596008849987;
             int range = 0; //범위를 0으로 주면 맛집이 출력되지 않음
@@ -95,7 +95,7 @@ class RestaurantRepositoryTest {
 
         @DisplayName("맛집 상세 정보 조회에 성공한다.")
         @Test
-        void 맛집_상세_정보_조회_성공(){
+        void 맛집_상세_정보_조회_성공한다(){
             Long id = 1L;
 
             Optional<RestaurantDetailResDto> dto = restaurantRepository.findRestaurantById(id);
