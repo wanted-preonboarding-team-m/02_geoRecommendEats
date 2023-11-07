@@ -23,7 +23,7 @@ class RestaurantControllerTest extends AbstractRestDocsTests {
     @DisplayName("맛집 조회 api 테스트")
     class getRestaurantsList {
 
-        @DisplayName("맛집 조회 api가 성공한다. 정렬기준은 거리")
+        @DisplayName("맛집 조회 api가 성공한다. 모든 필드 정상 + 정렬기준은 거리")
         @Test
         @WithMockUser(roles = {"USER"})
         void 맛집_조회_거리() throws Exception {
@@ -38,7 +38,7 @@ class RestaurantControllerTest extends AbstractRestDocsTests {
                 .andExpect(status().isOk());
         }
 
-        @DisplayName("맛집 조회 api가 성공한다. 정렬기준은 평점")
+        @DisplayName("맛집 조회 api가 성공한다. 모든 필드 정상 + 정렬기준은 평점")
         @Test
         @WithMockUser(roles = {"USER"})
         void 맛집_조회_평점() throws Exception {
@@ -54,7 +54,7 @@ class RestaurantControllerTest extends AbstractRestDocsTests {
 
         }
 
-        @DisplayName("맛집 조회 api가 성공한다. 정렬기준은 입력안하면 거리입니다.")
+        @DisplayName("맛집 조회 api가 성공한다. 모든 필드 정상 + 정렬기준은 입력안하면 거리입니다.")
         @Test
         @WithMockUser(roles = {"USER"})
         void 맛집_조회_디폴트는_거리() throws Exception {
@@ -70,10 +70,10 @@ class RestaurantControllerTest extends AbstractRestDocsTests {
 
         }
 
-        @DisplayName("맛집 조회 api가 실패한다.")
+        @DisplayName("위도가 입력되지 않아 맛집 조회 api가 실패한다.")
         @Test
         @WithMockUser(roles = {"USER"})
-        void 맛집_조회_실패() throws Exception {
+        void 맛집_조회_실패_위도없음() throws Exception {
             String lon = "127.07596008849987";
             Double range = 2.0;
             String sort = "";
