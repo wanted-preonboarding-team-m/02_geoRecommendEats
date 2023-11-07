@@ -1,7 +1,12 @@
 package com.wanted.domain.restaurant.application;
 
+import static com.wanted.global.error.ErrorCode.RESTAURANT_NOT_FOUND;
+
 import com.wanted.domain.restaurant.dao.RestaurantRepository;
+import com.wanted.domain.restaurant.dao.location.RestaurantLocationRepository;
+import com.wanted.domain.restaurant.dto.restaurant.response.RestaurantDetailResDto;
 import com.wanted.domain.restaurant.dto.restaurant.response.RestaurantRecomResDto;
+import com.wanted.global.error.BusinessException;
 import java.util.Comparator;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
+    private final RestaurantLocationRepository restaurantLocationRepository;
 
     /**
      * 맛집 목록 조회
@@ -83,5 +89,16 @@ public class RestaurantService {
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
         return R * c;
+    }
+
+    /**
+     * 맛집 상세 정보 조회
+     *
+     * @param restaurantId
+     * @return 맛집 상세 정보(open api에서 받아온 모든 필드 포함)
+     */
+    public RestaurantDetailResDto getRestaurantDetail(Long restaurantId){
+        return restaurantRepository.findRestaurantById(restaurantId)
+            .orElseThrow(() -> new BusinessException(restaurantId, "restaurantId", RESTAURANT_NOT_FOUND));
     }
 }

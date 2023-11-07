@@ -1,24 +1,20 @@
 package com.wanted.domain.restaurant.dao;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-import com.wanted.domain.restaurant.application.RestaurantService;
-import com.wanted.domain.restaurant.constant.FoodType;
+import com.wanted.domain.restaurant.dao.location.RestaurantLocationRepository;
+import com.wanted.domain.restaurant.dto.restaurant.response.RestaurantDetailResDto;
 import com.wanted.domain.restaurant.dto.restaurant.response.RestaurantRecomResDto;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import java.util.Arrays;
+import com.wanted.domain.restaurant.entity.location.RestaurantLocation;
 import java.util.List;
-import java.util.stream.Collectors;
-import org.junit.jupiter.api.Assertions;
+import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -27,12 +23,15 @@ class RestaurantRepositoryTest {
     @Autowired
     private RestaurantRepository restaurantRepository;
 
+    @Autowired
+    private RestaurantLocationRepository restaurantLocationRepository;
+
     @Nested
     @DisplayName("맛집 조회 테스트")
     class findRestaurantsWithinRange{
         @Test
         @DisplayName("맛집 조회에 성공한다.")
-        void 맛집_조회_성공() {
+        void 맛집_조회_성공한다() {
             double lat = 37.2040;
             double lon = 127.07596008849987;
             double range = 2.0;
@@ -73,8 +72,8 @@ class RestaurantRepositoryTest {
         }
 
         @Test
-        @DisplayName("맛집 조회에 실패한다.")
-        void 맛집_조회_실패() {
+        @DisplayName("범위를 0으로 주면 맛집 조회에 실패한다.")
+        void 범위가_0이면_맛집_조회_실패한다() {
             double lat = 37.2040;
             double lon = 127.07596008849987;
             int range = 0; //범위를 0으로 주면 맛집이 출력되지 않음
@@ -84,11 +83,25 @@ class RestaurantRepositoryTest {
             double minLon = lon - (0.01127 * range);
             double maxLon = lon + (0.01127 * range);
 
-            List<RestaurantRecomResDto> list = restaurantRepository.findRestaurantsWithinRange(minLat,
-                minLon, maxLat, maxLon);
+            List<RestaurantRecomResDto> list = restaurantRepository.findRestaurantsWithinRange(minLat, minLon, maxLat, maxLon);
 
             assertThat(list).isEmpty();
         }
     }
 
+    @Nested
+    @DisplayName("맛집 상세 정보 조회 테스트")
+    class findRestaurantsById{
+
+        @DisplayName("맛집 상세 정보 조회에 성공한다.")
+        @Test
+        void 맛집_상세_정보_조회_성공한다(){
+            Long id = 1L;
+
+            Optional<RestaurantDetailResDto> dto = restaurantRepository.findRestaurantById(id);
+
+            assertThat(dto).isPresent();
+
+        };
+    }
 }
