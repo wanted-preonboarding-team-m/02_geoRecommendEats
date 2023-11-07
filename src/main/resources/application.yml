@@ -30,3 +30,8 @@ open-api:
 csv:
   # 대한민국 시별 위도 경도 csv파일
   sgg_lat_lon: "src/main/resources/sgg_lat_lon.csv"
+
+jwt:
+  # TODO 배포시 반드시 숨겨야함
+  secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK
+

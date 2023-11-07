@@ -38,6 +38,10 @@ dependencies {
     // jsonParser 설치 (open api 응답값 파싱)
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
 
+    // JWT 토큰 관련 라이브러리
+    implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
 
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.mysql:mysql-connector-j'
