@@ -94,7 +94,7 @@ public class MemberService {
     String account = getMemberById(memberId).getAccount();
 
     if (!tokenProvider.getAccountFromToken(token).equals(account)) {
-      throw new BusinessException(memberId, "memberId", ErrorCode.ACCESS_AUTH_ENTRY_EXCEPTION);
+      throw new BusinessException(memberId, "memberId", ErrorCode.ACCESS_DENIED_EXCEPTION);
     }
   }
 }
