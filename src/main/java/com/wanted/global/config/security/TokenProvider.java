@@ -149,4 +149,24 @@ public class TokenProvider {
     }
     return false;
   }
+
+
+  /**
+   * 토큰에서 회원 id 찾기
+   *
+   * @param token 토큰
+   * @return 찾은 ID
+   */
+  public String getAccountFromToken(String token) {
+    if (token.startsWith("Bearer ")) {
+      token = token.substring(7);
+    }
+
+    return String.valueOf(Jwts.parserBuilder()
+        .setSigningKey(key)
+        .build()
+        .parseClaimsJws(token)
+        .getBody()
+        .getSubject());
+  }
 }
