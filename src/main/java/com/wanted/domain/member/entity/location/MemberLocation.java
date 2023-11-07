@@ -9,6 +9,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +20,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@AllArgsConstructor
+@Builder
 @Table(name = "member_location")
 public class MemberLocation extends BaseTimeEntity {
 
@@ -34,4 +38,14 @@ public class MemberLocation extends BaseTimeEntity {
   // 경도
   @Column(name = "logt", nullable = false)
   private Double logt;
+
+  /**
+   * Entity 로 수정
+   *
+   * @param memberLocation Entity
+   */
+  public void update(MemberLocation memberLocation) {
+    this.lat = memberLocation.getLat();
+    this.logt = memberLocation.getLogt();
+  }
 }

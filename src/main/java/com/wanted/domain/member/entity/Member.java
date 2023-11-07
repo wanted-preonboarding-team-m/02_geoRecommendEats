@@ -64,4 +64,13 @@ public class Member extends BaseTimeEntity {
     this.password = password;
     this.authority = authority;
   }
+
+  /**
+   * 지역 업데이트
+   *
+   * @param memberLocation 업데이트할 지역
+   */
+  public void updateLocation(MemberLocation memberLocation) {
+    this.memberLocation = memberLocation;
+  }
 }
