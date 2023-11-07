@@ -36,9 +36,9 @@ public class RestaurantController {
      */
     @GetMapping()
     public ResponseEntity<ApiResponse> getRecommendRestaurant(
-        @RequestParam(required = true) String lat,
-        @RequestParam(required = true) String lon,
-        @RequestParam(required = true) Double range,
+        @RequestParam String lat,
+        @RequestParam String lon,
+        @RequestParam Double range,
         @RequestParam(defaultValue = "distance") String sort
     ){
         List<RestaurantRecomResDto> restaurants = restaurantService.getRecommendRestaurant(lat,lon,range,sort);
