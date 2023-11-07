@@ -20,7 +20,14 @@ public enum ErrorCode {
   MEMBER_ACCOUNT_DUPLICATE("중복된 아이디 입니다.", HttpStatus.BAD_REQUEST),
   MEMBER_ACCOUNT_NOT_FOUND("아이디를 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
   MEMBER_PASSWORD_BAD_REQUEST("비밀번호가 틀렸습니다.", HttpStatus.BAD_REQUEST),
-  MEMBER_NOT_FOUND("존재하지 않은 회원입니다", HttpStatus.BAD_REQUEST),
+  MEMBER_NOT_FOUND("존재하지 않은 회원입니다", HttpStatus.NOT_FOUND),
+
+  // Restaurant
+  RESTAURANT_NOT_FOUND("존재하지 않은 가게입니다.", HttpStatus.NOT_FOUND),
+
+  // Review
+  REVIEW_SCORE_BAD_REQUEST("점수 양식이 잘못되었습니다,", HttpStatus.BAD_REQUEST),
+  REVIEW_DUPLICATE_WRITE("이미 작성한 리뷰가 있습니다", HttpStatus.BAD_REQUEST),
 
   // Security
   ACCESS_DENIED_EXCEPTION("필요한 접근 권한이 없습니다.", HttpStatus.FORBIDDEN),

@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -46,4 +47,13 @@ public class Review extends BaseTimeEntity {
   // 내용
   @Column(name = "content", nullable = false)
   private String content;
+
+  @Builder
+  public Review(Long id, Member member, Restaurant restaurant, Double score, String content) {
+    this.id = id;
+    this.member = member;
+    this.restaurant = restaurant;
+    this.score = score;
+    this.content = content;
+  }
 }
