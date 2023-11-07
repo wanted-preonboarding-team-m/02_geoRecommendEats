@@ -102,4 +102,21 @@ public class Member extends BaseTimeEntity {
       throw new BusinessException(restaurantId, "restaurantId", ErrorCode.REVIEW_DUPLICATE_WRITE);
     }
   }
+
+  /**
+   * 식당 id에 맞는 사용자 리뷰 찾기
+   *
+   * @param restaurantId 찾을 식당 Id
+   * @return 찾은 리뷰
+   */
+  public Review findReviewMatchRestaurant(Long restaurantId) {
+    Review foundReview = this.reviews.stream()
+        .filter(r -> r.getRestaurant().getId().equals(restaurantId))
+        .findFirst()
+        .orElseThrow(
+            () -> new BusinessException(restaurantId, "restaurantId", ErrorCode.REVIEW_NOT_FOUND)
+        );
+
+    return foundReview;
+  }
 }

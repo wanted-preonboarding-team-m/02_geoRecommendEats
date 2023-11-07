@@ -91,4 +91,34 @@ public class ReviewService {
 
     return new ReviewsInRestaurantResDto(reviews);
   }
+
+  /**
+   * 리뷰 수정
+   * 이전에 회원이 작성한 리뷰가 없으면 예외 처리.
+   * 이전 리뷰의 평점과 수정된 리뷰의 평점을 이용하여, 식당의 평균 평점 수정
+   *
+   * @param memberId     회원 Id
+   * @param restaurantId 식당 Id
+   * @param reqDto       리뷰 작성 데이터
+   * @return 수정된 리뷰 Id
+   */
+  @Transactional
+  public Long updateReview(Long memberId, Long restaurantId, ReviewWriteReqDto reqDto) {
+    // id로 회원을 가져온다.
+    Member member = getMemberById(memberId);
+    // 회원이 식당에 관한 리뷰를 가져온다. 없으면 예외 처리.
+    Review review = member.findReviewMatchRestaurant(restaurantId);
+    // 이전 평점 저장
+    Double prevScore = review.getScore();
+
+    // 리뷰 수정
+    review.update(reqDto);
+    // 이후 평점 저장
+    Double afterScore = review.getScore();
+
+    // 식당의 평균 평점 수정
+    getRestaurantById(restaurantId).updateRateByUpdate(prevScore, afterScore);
+
+    return review.getId();
+  }
 }

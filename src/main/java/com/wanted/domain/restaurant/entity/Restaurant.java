@@ -90,12 +90,23 @@ public class Restaurant {
   }
 
   /**
-   * 평점을 업데이트 한다.
+   * 평점을 업데이트 한다. - 새로운 리뷰가 들어올 때
    * 총 평점 (원래 총 평점(원래 평점 * 원래 리뷰의 수) + 새로운 평점) / 총 리뷰 수 (원래 리뷰의 수 + 1)
    *
    * @param score 새로 들어온 평점
    */
-  public void updateRate(Double score) {
+  public void updateRateByWrite(Double score) {
     this.rate = (this.rate * reviews.size() + score) / (reviews.size() + 1);
+  }
+
+  /**
+   * 평점을 업데이트 한다. - 이전 리뷰의 수정으로 인해
+   * 총 평점 (수정된 총 평점 (원래 평점 * 원래 리뷰의 수 ) - 이전 평점 + 새로운 평점 ) / 원래의 총 리뷰 수
+   *
+   * @param prevScore  이전 평점
+   * @param afterScore 새로 들어온 평점
+   */
+  public void updateRateByUpdate(Double prevScore, Double afterScore) {
+    this.rate = (this.rate * reviews.size() - prevScore + afterScore) / (reviews.size());
   }
 }

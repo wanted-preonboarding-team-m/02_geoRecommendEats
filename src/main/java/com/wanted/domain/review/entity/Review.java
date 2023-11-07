@@ -6,6 +6,7 @@ import static lombok.AccessLevel.PROTECTED;
 
 import com.wanted.domain.member.entity.Member;
 import com.wanted.domain.restaurant.entity.Restaurant;
+import com.wanted.domain.review.dto.request.ReviewWriteReqDto;
 import com.wanted.global.config.entity.BaseTimeEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -55,5 +56,15 @@ public class Review extends BaseTimeEntity {
     this.restaurant = restaurant;
     this.score = score;
     this.content = content;
+  }
+
+  /**
+   * 리뷰 수정
+   *
+   * @param reqDto 리뷰 작성 데이터
+   */
+  public void update(ReviewWriteReqDto reqDto) {
+    this.score = reqDto.getScore();
+    this.content = reqDto.getContent();
   }
 }
