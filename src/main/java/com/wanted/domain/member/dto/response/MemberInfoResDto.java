@@ -24,11 +24,14 @@ public class MemberInfoResDto {
   private LocalDateTime updatedAt;
   // 권한
   private String authority;
+  // 위치 정보
+  private MemberLocationResDto memberLocation;
 
   public MemberInfoResDto(Member member) {
     this.account = member.getAccount();
     this.createdAt = member.getCreatedAt();
     this.updatedAt = member.getUpdatedAt();
     this.authority = member.getAuthority().toString();
+    this.memberLocation = new MemberLocationResDto(member.getMemberLocation());
   }
 }
