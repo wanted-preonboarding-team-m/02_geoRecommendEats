@@ -1,5 +1,6 @@
 package com.wanted.domain.member;
 
+import com.wanted.domain.member.entity.Authority;
 import com.wanted.domain.member.entity.Member;
 
 /**
@@ -12,6 +13,7 @@ public class MemberTestHelper {
         .id(1L)
         .account("test1234")
         .password("test123*")
+        .authority(Authority.ROLE_USER)
         .build();
   }
 
@@ -19,6 +21,7 @@ public class MemberTestHelper {
     return Member.builder()
         .account("test1234")
         .password("test123*")
+        .authority(Authority.ROLE_USER)
         .build();
   }
 }

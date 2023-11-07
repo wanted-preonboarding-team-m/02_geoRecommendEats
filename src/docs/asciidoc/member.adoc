@@ -15,3 +15,48 @@ include::{snippets}/signup/회원_가입이_정상적으로_성공한다/http-re
 - 400 BadRequest
 
 include::{snippets}/signup/올바르지_않은_데이터는_회원_가입이_실패한다/http-response.adoc[]
+
+== 로그인
+
+Request
+
+include::{snippets}/login/아이디_비번이_일치할_경우_토큰이_반환이_성공된다_/http-request.adoc[]
+
+Response
+
+- 200
+
+include::{snippets}/login/아이디_비번이_일치할_경우_토큰이_반환이_성공된다_/http-response.adoc[]
+
+- 400
+
+include::{snippets}/login/아이디_비번이_일치하지_않을_경우_토큰이_반환이_실패한다_/http-response.adoc[]
+
+== 토큰 재발급
+
+Request
+
+include::{snippets}/login/아이디_비번이_일치할_경우_토큰이_반환이_성공된다_/http-request.adoc[]
+
+Response
+
+- 200
+
+include::{snippets}/login/아이디_비번이_일치할_경우_토큰이_반환이_성공된다_/http-response.adoc[]
+
+- 400
+
+include::{snippets}/login/아이디_비번이_일치하지_않을_경우_토큰이_반환이_실패한다_/http-response.adoc[]
+
+== 로그아웃
+
+Request
+
+include::{snippets}/login/올바른_토큰일_경우_로그아웃에_성공한다/http-request.adoc[]
+
+Response
+
+- 200
+
+include::{snippets}/login/올바른_토큰일_경우_로그아웃에_성공한다/http-response.adoc[]
+

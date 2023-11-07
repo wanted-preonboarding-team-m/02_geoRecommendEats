@@ -2,6 +2,7 @@ package com.wanted.domain.member.dto.request;
 
 import static com.wanted.domain.member.entity.Member.MAX_ACCOUNT_LENGTH;
 
+import com.wanted.domain.member.entity.Authority;
 import com.wanted.domain.member.entity.Member;
 import com.wanted.global.error.BusinessException;
 import com.wanted.global.error.ErrorCode;
@@ -66,6 +67,7 @@ public class MemberSignUpReqDto {
     return Member.builder()
         .account(this.account)
         .password(passwordEncoder.encode(this.password))
+        .authority(Authority.ROLE_USER)
         .build();
   }
 }

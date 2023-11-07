@@ -4,7 +4,9 @@ import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 import com.wanted.domain.auth.application.AuthService;
+import com.wanted.domain.member.dto.request.MemberLoginReqDto;
 import com.wanted.domain.member.dto.request.MemberSignUpReqDto;
+import com.wanted.global.config.security.data.TokenReqDto;
 import com.wanted.global.util.format.response.ApiResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -53,5 +55,45 @@ public class AuthController {
 
     return ResponseEntity.status(NO_CONTENT)
         .body(ApiResponse.toSuccessForm(""));
+  }
+
+  /**
+   * 로그인 및 토큰 발급
+   *
+   * @param reqDto 로그인 입력 데이터
+   * @return 200, JWT 토큰
+   */
+  @PostMapping("/login")
+  public ResponseEntity<ApiResponse> login(
+      @RequestBody MemberLoginReqDto reqDto
+  ) {
+    return ResponseEntity.ok(ApiResponse.toSuccessForm(authService.login(reqDto)));
+  }
+
+  /**
+   * 토큰 재발급
+   *
+   * @param reqDto 토큰 정보 dto
+   * @return 200, 재발급 된 JWT 토큰
+   */
+  @PostMapping("/reissue")
+  public ResponseEntity<ApiResponse> reissue(
+      @RequestBody TokenReqDto reqDto
+  ) {
+    return ResponseEntity.ok(ApiResponse.toSuccessForm(authService.reissue(reqDto)));
+  }
+
+  /**
+   * 로그아웃 및 토큰 삭제
+   *
+   * @param reqDto 토큰 정보
+   * @return 200, 토큰 삭제
+   */
+  @PostMapping("/logout")
+  public ResponseEntity<ApiResponse> logout(
+      @RequestBody TokenReqDto reqDto
+  ) {
+    authService.logout(reqDto);
+    return ResponseEntity.ok(ApiResponse.toSuccessForm(null));
   }
 }
