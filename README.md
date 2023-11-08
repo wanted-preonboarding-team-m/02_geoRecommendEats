@@ -8,11 +8,13 @@
 3. [프로젝트 개요](#프로젝트-개요)
 4. [프로젝트 일정관리](#프로젝트-일정관리)
 5. [구현 기능 목록](#구현-기능-목록)
-6. [ERD](#erd)
-7. [구현 과정](#구현-과정)
-8. [담당한 역할](#담당한-역할)
-9. [API 명세](#api-명세)
-10. [테스트](#테스트)
+6. [설계 및 의도](#설계-및-의도)
+7. [ERD](#erd)
+8. [구현 과정](#구현-과정)
+9. [담당한 역할](#담당한-역할)
+10. [API 명세](#api-명세)
+11. [테스트](#테스트)
+12. [TIL 및 회고](#TIL-및-회고)
 
 ## 개발 기간
 
@@ -46,6 +48,7 @@ https://mizuirohoshi7.notion.site/b298797bef954741bd7ab33a047ba01a
 
 https://github.com/orgs/wanted-preonboarding-team-m/projects/4/views/1
 
+
 ## 구현 기능 목록
 
 * 유저
@@ -70,11 +73,15 @@ https://github.com/orgs/wanted-preonboarding-team-m/projects/4/views/1
   * 맛집 상세 정보 조회
   * 맛집 평가
 
+## 설계 및 의도
+*작성예정*
+
 ## ERD
 
 **Erd Cloud**
 
-*작성예정*
+![image](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/assets/57309311/a34cfd22-2400-40c4-ad97-0bbf21b5d200)
+
 
 ## 구현 과정
 
@@ -89,20 +96,20 @@ https://github.com/orgs/wanted-preonboarding-team-m/projects/4/views/1
 2. 유저 기능 구현
    * [회원가입](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/issues/13)
    * [로그인](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/issues/16)
-   * 사용자 위치 설정
-   * 사용자 정보 상세 조회
+   * [사용자 위치 설정](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/issues/28)
+   * [사용자 정보 상세 조회](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/issues/28)
    
 
 3. [데이터파이프라인](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/issues/4)
-    * [파이프라인 리팩토링](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/issues/10[)
+    * [스케쥴러 적용](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/issues/26)
     * [csv 데이터 업로드](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/issues/8)
 
 
-4. 맛집
-    * 시구군 목록 조회
-    * 사용자 위치 기반 맛집 목록 조회
-    * 맛집 상세정보 조회
-    * 맛집 평가
+4. 맛집 기능 구현
+    * [시구군 목록 조회](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/issues/19)
+    * [사용자 위치 기반 맛집 목록 조회](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/issues/21)
+    * [맛집 상세정보 조회](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/issues/25)
+    * [맛집 평가](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/issues/29)
    
 ## 담당한 역할
 
@@ -118,9 +125,15 @@ https://github.com/orgs/wanted-preonboarding-team-m/projects/4/views/1
 
 **Spring Rest Docs 기반 API 명세서**
 
-*작성예정*
+https://wanted-preonboarding-team-m.github.io/02_geoRecommendEats/src/main/resources/static/index.html
 
+![image](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/assets/57309311/d5034d8c-975a-4e2c-af30-059f4c486f56)
 ## 테스트
 
 *작성예정*
 
+## TIL 및 회고
+* [하나의 객체를 여러 테이블로 분리한다면?](https://www.notion.so/mizuirohoshi7/ec334759b596410c871d9ea1a3ce47b5?pvs=4)
+* [RestTemplate로 json을 객체로 자동 변환](https://www.notion.so/mizuirohoshi7/RestTemplate-json-9402434b740042498a7f748dfc5e78f5?pvs=4)
+* [시큐리티의 비밀번호 검증은 언제 일어나는걸까](https://www.notion.so/mizuirohoshi7/2651c325e42b44bab3241164c956f45a?pvs=4)
+* [CaseCade로 인해 JPA Delete가 작동 안한 이유](https://www.notion.so/mizuirohoshi7/CaseCade-JPA-Delete-b96e3dfd88e94526a4c8813e6854520e?pvs=4)
