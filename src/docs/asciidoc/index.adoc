@@ -70,4 +70,6 @@
 ```
 
 include::member.adoc[]
+include::location.adoc[]
+include::restaurant.adoc[]
 include::review.adoc[]
