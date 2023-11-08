@@ -80,7 +80,7 @@ https://github.com/orgs/wanted-preonboarding-team-m/projects/4/views/1
 
 **Erd Cloud**
 
-![image](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/assets/57309311/a34cfd22-2400-40c4-ad97-0bbf21b5d200)
+![87D62F6B-6E38-4CC9-A76A-7D3489A9654E_1_201_a](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/assets/57309311/5080cb4a-1d30-44d8-8a4c-f68453506643)
 
 
 ## 구현 과정
