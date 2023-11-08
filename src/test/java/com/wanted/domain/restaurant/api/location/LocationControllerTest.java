@@ -15,17 +15,17 @@ import org.springframework.security.test.context.support.WithMockUser;
 @WebMvcTest(LocationController.class)
 class LocationControllerTest extends AbstractRestDocsTests {
 
-    @MockBean
-    private LocationService locationService;
+  @MockBean
+  private LocationService locationService;
 
-    @DisplayName("시구군 데이터가 정상적으로 조회된다.")
-    @Test
-    @WithMockUser(roles = {"USER"})
-    void 시구군_조회가_정상적으로_성공한다() throws Exception {
+  @DisplayName("시구군 데이터가 정상적으로 조회된다.")
+  @Test
+  @WithMockUser(roles = {"USER"})
+  void 시구군_조회가_정상적으로_성공한다() throws Exception {
 
-        mockMvc.perform(
-                get("/api/v1/location"))
-            .andExpect(status().isOk());
-    }
+    mockMvc.perform(
+            get("/api/v1/location"))
+        .andExpect(status().isOk());
+  }
 
 }

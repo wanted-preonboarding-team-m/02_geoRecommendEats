@@ -11,15 +11,15 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class LocationService {
 
-    private final CsvSaveDto csvSaveDto;
+  private final CsvSaveDto csvSaveDto;
 
-    /**
-     * 전체 시구군 조회
-     *
-     * @return CsvResponseDto 리스트 , fields: dosi(도시), sigungu(시군구) lat(y축) ,lon(x축)
-     */
-    public List<CsvResponseDto> getAllLocations(){
-        return csvSaveDto.getAllDosiAndSigungu();
-    }
+  /**
+   * 전체 시구군 조회
+   *
+   * @return CsvResponseDto 리스트 , fields: dosi(도시), sigungu(시군구) lat(y축) ,lon(x축)
+   */
+  public List<CsvResponseDto> getAllLocations() {
+    return csvSaveDto.getAllDosiAndSigungu();
+  }
 
 }

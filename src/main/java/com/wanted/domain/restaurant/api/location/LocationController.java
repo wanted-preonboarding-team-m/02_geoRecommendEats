@@ -15,21 +15,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/location")
 public class LocationController {
 
-    private final LocationService locationService;
+  private final LocationService locationService;
 
-    /**
-     * 전체 시구군 조회
-     *
-     * @return 200 , 전체 시구군 정보(dosi(도시), sigungu(시군구) lat(y축) ,lon(x축))
-     */
-    @GetMapping
-    public ResponseEntity<ApiResponse> getAllLocations(){
-        List<CsvResponseDto> locations = locationService.getAllLocations();
+  /**
+   * 전체 시구군 조회
+   *
+   * @return 200 , 전체 시구군 정보(dosi(도시), sigungu(시군구) lat(y축) ,lon(x축))
+   */
+  @GetMapping
+  public ResponseEntity<ApiResponse> getAllLocations() {
+    List<CsvResponseDto> locations = locationService.getAllLocations();
 
-        ApiResponse apiResponse = ApiResponse.toSuccessForm(locations);
+    ApiResponse apiResponse = ApiResponse.toSuccessForm(locations);
 
-        return ResponseEntity.ok(apiResponse);
-    }
+    return ResponseEntity.ok(apiResponse);
+  }
 
 
 }
