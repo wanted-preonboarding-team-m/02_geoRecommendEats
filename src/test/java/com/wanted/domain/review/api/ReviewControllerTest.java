@@ -2,8 +2,11 @@ package com.wanted.domain.review.api;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doThrow;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,6 +17,8 @@ import com.wanted.domain.review.application.ReviewService;
 import com.wanted.domain.review.dto.request.ReviewWriteReqDto;
 import com.wanted.domain.review.dto.response.ReviewsInRestaurantResDto;
 import com.wanted.domain.review.entity.Review;
+import com.wanted.global.error.BusinessException;
+import com.wanted.global.error.ErrorCode;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -95,6 +100,79 @@ class ReviewControllerTest extends AbstractRestDocsTests {
 
       mockMvc.perform(get(REVIEW_URL + "/restaurants/1"))
           .andExpect(status().isOk());
+    }
+  }
+
+  @Nested
+  @DisplayName("리류 수정 관련 테스트")
+  class updateReview {
+
+    @Test
+    @DisplayName("이전에 리뷰가 있으면, 리뷰 수정에 성공한다.")
+    void 이전에_리뷰가_있으면_리뷰_수정에_성공한다() throws Exception {
+      ReviewWriteReqDto reqDto =
+          ReviewWriteReqDto.builder()
+              .content("리뷰 내용")
+              .score(4.5)
+              .build();
+
+      given(reviewService.updateReview(any(), any(), any())).willReturn(1L);
+
+      mockMvc.perform(put(REVIEW_URL + "/members/1/1")
+              .contentType(MediaType.APPLICATION_JSON)
+              .header(HttpHeaders.AUTHORIZATION, "JWT_TOKEN")
+              .content(objectMapper.writeValueAsString(reqDto)))
+          .andExpect(status().isCreated());
+    }
+
+    @Test
+    @DisplayName("이전에 리뷰가 없으면, 리뷰 수정에 실패한다.")
+    void 이전에_리뷰가_없으면_리뷰_수정에_실패한다() throws Exception {
+      ReviewWriteReqDto reqDto =
+          ReviewWriteReqDto.builder()
+              .content("리뷰 내용")
+              .score(4.5)
+              .build();
+
+      given(reviewService.updateReview(any(), any(), any())).willThrow(
+          new BusinessException(1L, "restaurantId", ErrorCode.REVIEW_NOT_FOUND)
+      );
+
+      mockMvc.perform(put(REVIEW_URL + "/members/1/1")
+              .contentType(MediaType.APPLICATION_JSON)
+              .header(HttpHeaders.AUTHORIZATION, "JWT_TOKEN")
+              .content(objectMapper.writeValueAsString(reqDto)))
+          .andExpect(status().isNotFound());
+    }
+  }
+
+  @Nested
+  @DisplayName("리뷰 삭제 관련 테스트")
+  class deleteReview {
+
+    @Test
+    @DisplayName("이전에 리뷰가 있으면, 리뷰 삭제에 성공한다.")
+    void 이전에_리뷰가_있으면_리뷰_삭제에_성공한다() throws Exception {
+
+      mockMvc.perform(delete(REVIEW_URL + "/members/1/1")
+              .contentType(MediaType.APPLICATION_JSON)
+              .header(HttpHeaders.AUTHORIZATION, "JWT_TOKEN"))
+          .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("이전에 리뷰가 없으면, 리뷰 삭제에 실패한다.")
+    void 이전에_리뷰가_없으면_리뷰_삭제에_실패한다() throws Exception {
+
+      doThrow(new BusinessException(1, "restaurantId",
+          ErrorCode.REVIEW_NOT_FOUND))
+          .when(reviewService)
+          .deleteReview(any(), any());
+
+      mockMvc.perform(delete(REVIEW_URL + "/members/1/1")
+              .contentType(MediaType.APPLICATION_JSON)
+              .header(HttpHeaders.AUTHORIZATION, "JWT_TOKEN"))
+          .andExpect(status().isNotFound());
     }
   }
 }

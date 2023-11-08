@@ -14,7 +14,7 @@ include::{snippets}/write-review/정상적인_데이터_일_때_리뷰_작성에
 - 400 (점수 형식 틀림)
 include::{snippets}/write-review/점수_형식이_맞지_않으면_리뷰_작성에_실패한다/http-response.adoc[]
 
-== 회사의 모든 리뷰 조회
+=== 회사의 모든 리뷰 조회
 
 request
 
@@ -25,3 +25,35 @@ response
 - 200
 
 include::{snippets}/read-review/정상적으로_회사의_모든_리뷰를_반환한다/http-response.adoc[]
+
+=== 리뷰 수정
+
+request
+
+include::{snippets}/update-review/이전에_리뷰가_있으면_리뷰_수정에_성공한다/http-request.adoc[]
+
+response
+
+- 201
+
+include::{snippets}/update-review/이전에_리뷰가_있으면_리뷰_수정에_성공한다/http-response.adoc[]
+
+- 404 (이전에 작성한 리뷰가 없을 때)
+
+include::{snippets}/update-review/이전에_리뷰가_없으면_리뷰_수정에_실패한다/http-response.adoc[]
+
+=== 리뷰 삭제
+
+request
+
+include::{snippets}/delete-review/이전에_리뷰가_있으면_리뷰_삭제에_성공한다/http-request.adoc[]
+
+response
+
+- 200
+
+include::{snippets}/delete-review/이전에_리뷰가_있으면_리뷰_삭제에_성공한다/http-response.adoc[]
+
+- 404 (이전에 작성한 리뷰가 없을 때)
+
+include::{snippets}/delete-review/이전에_리뷰가_없으면_리뷰_삭제에_실패한다/http-response.adoc[]

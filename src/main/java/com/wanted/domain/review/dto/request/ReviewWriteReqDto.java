@@ -36,7 +36,7 @@ public class ReviewWriteReqDto {
    * @return 리뷰 Entity
    */
   public Review toEntity(Member member, Restaurant restaurant) {
-    restaurant.updateRate(this.score);
+    restaurant.updateRateByWrite(this.score);
 
     return Review.builder()
         .member(member)

@@ -1,6 +1,5 @@
 package com.wanted.domain.member.entity;
 
-import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.EnumType.STRING;
 import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
@@ -64,7 +63,7 @@ public class Member extends BaseTimeEntity {
   private Authority authority;
 
   // 작성한 리뷰들 (1:N)
-  @OneToMany(fetch = LAZY, cascade = ALL, mappedBy = "member")
+  @OneToMany(mappedBy = "member", fetch = LAZY)
   private List<Review> reviews = new ArrayList<>();
 
   @Builder
@@ -101,5 +100,24 @@ public class Member extends BaseTimeEntity {
     if (!isCanWriteReview) {
       throw new BusinessException(restaurantId, "restaurantId", ErrorCode.REVIEW_DUPLICATE_WRITE);
     }
+  }
+
+  /**
+   * 식당 id에 맞는 사용자 리뷰 찾기
+   *
+   * @param restaurantId 찾을 식당 Id
+   * @return 찾은 리뷰
+   */
+  public Review findReviewMatchRestaurant(Long restaurantId) {
+    Review foundReview =
+        this.reviews.stream()
+            .filter(r -> r.getRestaurant().getId().equals(restaurantId))
+            .findFirst()
+            .orElseThrow(
+                () -> new BusinessException(restaurantId, "restaurantId",
+                    ErrorCode.REVIEW_NOT_FOUND)
+            );
+
+    return foundReview;
   }
 }

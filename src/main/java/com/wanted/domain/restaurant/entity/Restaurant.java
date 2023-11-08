@@ -1,7 +1,5 @@
 package com.wanted.domain.restaurant.entity;
 
-import static jakarta.persistence.CascadeType.ALL;
-
 import com.wanted.domain.restaurant.entity.employee.RestaurantEmployee;
 import com.wanted.domain.restaurant.entity.facility.RestaurantFacility;
 import com.wanted.domain.restaurant.entity.hygiene.RestaurantHygiene;
@@ -70,7 +68,7 @@ public class Restaurant {
   private double rate;
 
   // 리뷰들 (1:N)
-  @OneToMany(mappedBy = "restaurant", cascade = ALL)
+  @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
   private List<Review> reviews = new ArrayList<>();
 
   @Builder
@@ -90,12 +88,37 @@ public class Restaurant {
   }
 
   /**
-   * 평점을 업데이트 한다.
+   * 평점을 업데이트 한다. - 새로운 리뷰가 들어올 때
    * 총 평점 (원래 총 평점(원래 평점 * 원래 리뷰의 수) + 새로운 평점) / 총 리뷰 수 (원래 리뷰의 수 + 1)
    *
    * @param score 새로 들어온 평점
    */
-  public void updateRate(Double score) {
-    this.rate = (this.rate * reviews.size() + score) / (reviews.size() + 1);
+  public void updateRateByWrite(Double score) {
+    this.rate = (this.rate * this.reviews.size() + score) / (this.reviews.size() + 1);
+  }
+
+  /**
+   * 평점을 업데이트 한다. - 이전 리뷰의 수정으로 인해
+   * 총 평점 (원래 총 평점 (원래 평점 * 원래 리뷰의 수 ) - 이전 평점 + 새로운 평점 ) / 원래의 총 리뷰 수
+   *
+   * @param prevScore  이전 평점
+   * @param afterScore 새로 들어온 평점
+   */
+  public void updateRateByUpdate(Double prevScore, Double afterScore) {
+    this.rate = (this.rate * this.reviews.size() - prevScore + afterScore) / (this.reviews.size());
+  }
+
+  /**
+   * 평점을 업데이트 한다. - 이전 리뷰의 삭제로 인해
+   * 리뷰가 하나밖에 없으면 0점. (나누기 0은 오류 발생)
+   * 총 평점 (원래 총 평점 (원래 평점 * 원래 리퓨의 수) - 삭제된 평점) / 총 리뷰 수 (원래 리뷰의 수 -1)
+   *
+   * @param score 삭제되는 점수
+   */
+  public void updateRateByDelete(Double score) {
+    this.rate =
+        this.reviews.size() != 1
+            ? (this.rate * this.reviews.size() - score) / (this.reviews.size() - 1)
+            : 0;
   }
 }
