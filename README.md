@@ -118,7 +118,6 @@ https://github.com/orgs/wanted-preonboarding-team-m/projects/4/views/1
 * [김선재](https://github.com/mizuirohoshi7): 데이터 파이프라인 구축
 * [최소영](https://github.com/soyeong125): 프로젝트 환경 설정, 맛집 조회 기능 구현
 
-
 * 코드 리뷰 및 리팩토링은 조원 모두가 함께 했습니다.
 
 ## API 명세
@@ -130,7 +129,11 @@ https://wanted-preonboarding-team-m.github.io/02_geoRecommendEats/src/main/resou
 ![image](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/assets/57309311/d5034d8c-975a-4e2c-af30-059f4c486f56)
 ## 테스트
 
-*작성예정*
+### ✅ 24/24 (2초 33ms)
+
+![image](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/assets/57309311/c8265e01-9e0d-417f-865b-408e7e672322)
+
+단위 테스트로 각 계층을 분리했습니다.
 
 ## TIL 및 회고
 * [하나의 객체를 여러 테이블로 분리한다면?](https://www.notion.so/mizuirohoshi7/ec334759b596410c871d9ea1a3ce47b5?pvs=4)
