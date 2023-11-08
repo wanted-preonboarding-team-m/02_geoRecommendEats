@@ -121,4 +121,26 @@ public class ReviewService {
 
     return review.getId();
   }
+
+  /**
+   * 리뷰 삭제
+   * 이전에 회원이 작성한 리뷰가 없으면 예외 처리.
+   * 삭제되는 리뷰의 점수로, 식당의 평점 수정
+   *
+   * @param memberId     회원 Id
+   * @param restaurantId 식당 Id
+   */
+  @Transactional
+  public void deleteReview(Long memberId, Long restaurantId) {
+    // id로 회원을 가져온다.
+    Member member = getMemberById(memberId);
+    // 회원이 식당에 관한 리뷰를 가져온다. 없으면 예외 처리.
+    Review review = member.findReviewMatchRestaurant(restaurantId);
+
+    // 평점 수정
+    getRestaurantById(restaurantId).updateRateByDelete(review.getScore());
+
+    // 리뷰 삭제
+    reviewRepository.delete(review);
+  }
 }

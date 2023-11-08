@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -93,5 +94,27 @@ public class ReviewController {
 
     return ResponseEntity.status(HttpStatus.CREATED)
         .body(ApiResponse.toSuccessForm(reviewId));
+  }
+
+  /**
+   * 리뷰 삭제
+   *
+   * @param token        JWT 토큰
+   * @param memberId     회원 Id
+   * @param restaurantId 식당 Id
+   */
+  @DeleteMapping("/members/{memberId}/{restaurantId}")
+  public ResponseEntity<ApiResponse> deleteReview(
+      @RequestHeader(AUTHORIZATION) String token,
+      @PathVariable("memberId") Long memberId,
+      @PathVariable("restaurantId") Long restaurantId
+  ) {
+    // 토큰의 유저 account 와 리뷰를 작성할 유저 account 는 같아야 한다.
+    authService.validSameTokenAccount(token, memberId);
+
+    reviewService.deleteReview(memberId, restaurantId);
+
+    return ResponseEntity.status(HttpStatus.OK)
+        .body(ApiResponse.toSuccessForm(""));
   }
 }
