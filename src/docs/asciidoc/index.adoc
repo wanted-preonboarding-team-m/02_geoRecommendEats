@@ -70,3 +70,4 @@
 ```
 
 include::member.adoc[]
+include::review.adoc[]

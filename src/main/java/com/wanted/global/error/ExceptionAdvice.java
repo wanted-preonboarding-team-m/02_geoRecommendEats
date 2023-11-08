@@ -54,7 +54,7 @@ public class ExceptionAdvice {
     return bindingResult.getFieldErrors().stream()
         .map(fieldError ->
             getErrorMessage(
-                (String) fieldError.getRejectedValue(),
+                String.valueOf(fieldError.getRejectedValue()), // (String)은 Double 등이 올 경우 에러
                 fieldError.getField(),
                 fieldError.getDefaultMessage()
             )

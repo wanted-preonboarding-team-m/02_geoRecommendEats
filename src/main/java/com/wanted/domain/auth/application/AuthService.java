@@ -156,4 +156,24 @@ public class AuthService {
     // 4. 저장소에서 회원 ID 를 기반으로 Refresh Token 삭제
     refreshTokenRepository.deleteByKey(authentication.getName());
   }
+
+  /**
+   * 토큰의 회원 account 와 ID 회원의 account가 같은지 확인
+   *
+   * @param token    확인할 토큰
+   * @param memberId 비교할 회원의 id
+   */
+  public void validSameTokenAccount(String token, Long memberId) {
+    // 회원의 아이디로 account 찾기
+    String memberAccount = memberRepository.findById(memberId).orElseThrow(
+        () -> new BusinessException(memberId, "memberId", ErrorCode.MEMBER_ACCOUNT_NOT_FOUND)
+    ).getAccount();
+
+    // 토큰으로 account 찾기
+    String tokenAccount = tokenProvider.getAccountFromToken(token);
+
+    if (!memberAccount.equals(tokenAccount)) {
+      throw new BusinessException(memberAccount, "account", ErrorCode.ACCESS_DENIED_EXCEPTION);
+    }
+  }
 }
