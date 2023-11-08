@@ -16,10 +16,10 @@ include::{snippets}/get-restaurants-list/맛집_조회가_정상적으로_성공
 
 Request
 
-include::{snippets}/get-restaurant-detail/맛집_상세_정보_조회_성공/http-request.adoc[]
+include::{snippets}/get-restaurant-detail/맛집_상세_정보_조회가_성공한다/http-request.adoc[]
 
 Response
 
 - 200 Ok
 
-include::{snippets}/get-restaurant-detail/맛집_상세_정보_조회_성공/http-response.adoc[]
+include::{snippets}/get-restaurant-detail/맛집_상세_정보_조회가_성공한다/http-response.adoc[]
