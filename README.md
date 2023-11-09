@@ -140,3 +140,5 @@ https://wanted-preonboarding-team-m.github.io/02_geoRecommendEats/src/main/resou
 * [RestTemplate로 json을 객체로 자동 변환](https://www.notion.so/mizuirohoshi7/RestTemplate-json-9402434b740042498a7f748dfc5e78f5?pvs=4)
 * [시큐리티의 비밀번호 검증은 언제 일어나는걸까](https://www.notion.so/mizuirohoshi7/2651c325e42b44bab3241164c956f45a?pvs=4)
 * [CaseCade로 인해 JPA Delete가 작동 안한 이유](https://www.notion.so/mizuirohoshi7/CaseCade-JPA-Delete-b96e3dfd88e94526a4c8813e6854520e?pvs=4)
+* [JPA 사용시 N+1 문제를 해결하는 방법](https://www.notion.so/mizuirohoshi7/JPA-N-1-29737eba15de455aa5b2425a6cdde786?pvs=4)
+* [JPQL vs QueryDsl](https://www.notion.so/mizuirohoshi7/JPQL-vs-QueryDsl-e7dbfdc69af24dffbd712a6a71bc5973?pvs=4)
