@@ -101,7 +101,7 @@ https://github.com/orgs/wanted-preonboarding-team-m/projects/4/views/1
    
 
 3. [데이터파이프라인](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/issues/4)
-    * [스케쥴러 적용](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/issues/26)
+    * [스케쥴러 적용](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/issues/38)
     * [csv 데이터 업로드](https://github.com/wanted-preonboarding-team-m/02_geoRecommendEats/issues/8)
 
 
